@@ -37,8 +37,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             val sdk = UnsplashWrapperSdk.Instance
             sdk.initialize(
-                apiKey = "",
-                privateKey = ""
+                apiKey = BuildConfig.publicKey,
+                privateKey = BuildConfig.privateKey
             )
 
             ImagefyTheme {

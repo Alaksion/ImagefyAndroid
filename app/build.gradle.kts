@@ -1,7 +1,12 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
+
+val properties = gradleLocalProperties(rootDir)
 
 android {
     namespace = "io.github.alaksion.imagefy"
@@ -18,6 +23,17 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField(
+            type = "String",
+            value = properties.getProperty("publicKey"),
+            name = "publicKey"
+        )
+        buildConfigField(
+            type = "String",
+            value = properties.getProperty("privateKey"),
+            name = "privateKey"
+        )
     }
 
     buildTypes {
@@ -38,6 +54,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -53,7 +70,7 @@ dependencies {
 
     implementation("io.github.alaksion:unsplash-wrapper:0.0.1")
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
