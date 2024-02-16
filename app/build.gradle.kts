@@ -103,4 +103,7 @@ dependencies {
     // DI
     implementation(libs.kodein)
 
+    // Projects
+    implementation(projects.platform.stateviewmodel)
+
 }
