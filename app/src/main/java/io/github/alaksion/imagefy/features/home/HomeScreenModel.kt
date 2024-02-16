@@ -1,6 +1,6 @@
 package io.github.alaksion.imagefy.features.home
 
-import io.github.alaksion.stateviewmodel.StateViewModel
+import io.github.alaksion.stateviewmodel.StateScreenModel
 import io.github.alaksion.unsplashwrapper.api.photos.domain.domain.models.listphotos.ListPhoto
 import io.github.alaksion.unsplashwrapper.api.photos.domain.domain.models.listphotos.ListPhotoOrderBy
 import io.github.alaksion.unsplashwrapper.api.photos.domain.repository.UnsplashPhotosRepository
@@ -17,10 +17,10 @@ internal data class HomeState(
     val showLoadingIndicator: Boolean = false,
 )
 
-internal class HomeViewModel(
+internal class HomeScreenModel(
     dispatcher: CoroutineDispatcher,
     private val photosRepository: UnsplashPhotosRepository,
-) : StateViewModel<HomeState>(
+) : StateScreenModel<HomeState>(
     dispatcher = dispatcher,
     initialState = HomeState()
 ) {

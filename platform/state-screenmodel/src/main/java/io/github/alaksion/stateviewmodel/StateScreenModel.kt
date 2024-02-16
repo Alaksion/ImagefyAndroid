@@ -1,7 +1,7 @@
 package io.github.alaksion.stateviewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import cafe.adriel.voyager.core.model.ScreenModel
+import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-abstract class StateViewModel<T>(
+abstract class StateScreenModel<T>(
     private val dispatcher: CoroutineDispatcher,
     private val logger: StateLogger = MutedLogger,
     initialState: T,
     initialMode: UiMode = UiMode.Content
-) : ViewModel() {
+) : ScreenModel {
 
     private val _state = MutableStateFlow<UiState<T>>(
         UiState(
@@ -46,7 +46,7 @@ abstract class StateViewModel<T>(
     fun updateState(
         block: suspend StateUpdater<T>.() -> Unit,
         showLoading: Boolean = true,
-    ): Job = viewModelScope.launch(dispatcher) {
+    ): Job = screenModelScope.launch(dispatcher) {
         if (showLoading)
             _state.update { old -> old.copy(mode = UiMode.Loading) }
         runCatching {

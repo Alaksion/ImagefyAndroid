@@ -7,7 +7,7 @@ import org.kodein.di.instance
 
 val homeModule = DI.Module("home-di") {
     bindProvider {
-        HomeViewModel(
+        HomeScreenModel(
             dispatcher = Dispatchers.Default,
             photosRepository = instance()
         )

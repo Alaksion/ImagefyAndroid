@@ -80,8 +80,6 @@ dependencies {
     implementation(compose.materialIconsExtended)
     implementation(libs.compose.activity)
 
-    // Compose Test
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 
     // Compose Debug
     debugImplementation(compose.uiTooling)
@@ -91,7 +89,6 @@ dependencies {
     // Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // Kotlin
     implementation(libs.kotlinx.datetime)
@@ -105,6 +102,6 @@ dependencies {
     implementation(libs.kodein)
 
     // Projects
-    implementation(projects.platform.stateviewmodel)
+    implementation(projects.platform.stateScreenmodel)
 
 }
