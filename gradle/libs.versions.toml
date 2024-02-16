@@ -5,6 +5,7 @@ compose-bom = "2024.02.00"
 compose-compiler = "1.5.1"
 kodein = "7.21.1"
 compose-activity = "1.8.2"
+voyager = "1.0.0"
 
 [libraries]
 # Compose
@@ -18,6 +19,10 @@ compose-activity = { module = "androidx.activity:activity-compose", version.ref 
 
 # Kodein
 kodein = { module = "org.kodein.di:kodein-di-framework-compose", version.ref = "kodein" }
+
+# Voyager
+voyager-core = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-kodein = { module = "cafe.adriel.voyager:voyager-kodein", version.ref = "voyager" }
 
 
 [plugins]

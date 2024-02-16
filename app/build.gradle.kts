@@ -98,4 +98,12 @@ dependencies {
 
     // Projects
     implementation(projects.platform.statemodel)
+
+    // Voyager
+    implementation(libs.voyager.core)
+    implementation(libs.voyager.kodein)
+
+    // DI
+    implementation(libs.kodein)
+
 }
