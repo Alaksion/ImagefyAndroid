@@ -96,9 +96,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
 
-    // Projects
-    implementation(projects.platform.statemodel)
-
     // Voyager
     implementation(libs.voyager.core)
     implementation(libs.voyager.kodein)
