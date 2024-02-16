@@ -1,8 +1,10 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import org.jetbrains.compose.ExperimentalComposeLibrary
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.jetbrains.compose)
 }
 
 val properties = gradleLocalProperties(rootDir)
@@ -56,7 +58,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+        kotlinCompilerExtensionVersion = libs.versions.compose.plugin.get()
     }
     packaging {
         resources {
@@ -72,20 +74,19 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
     // Compose
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
-    implementation(libs.compose.graphics)
-    implementation(libs.compose.tooling)
-    implementation(libs.compose.material3)
+    implementation(compose.ui)
+    implementation(compose.uiTooling)
+    implementation(compose.material3)
+    implementation(compose.materialIconsExtended)
     implementation(libs.compose.activity)
 
     // Compose Test
-    androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 
     // Compose Debug
-    debugImplementation(libs.compose.tooling)
-    debugImplementation(libs.compose.test.manifest)
+    debugImplementation(compose.uiTooling)
+    @OptIn(ExperimentalComposeLibrary::class)
+    debugImplementation(compose.uiTest)
 
     // Test
     testImplementation("junit:junit:4.13.2")
@@ -93,8 +94,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // Kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.collections.immutable)
 
     // Voyager
     implementation(libs.voyager.core)
