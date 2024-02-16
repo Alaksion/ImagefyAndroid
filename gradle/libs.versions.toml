@@ -6,7 +6,7 @@ compose-activity = "1.8.2"
 kotlinx-collections-immutable = "0.3.7"
 kotlinx-datetime = "0.5.0"
 voyager = "1.0.0"
-coroutines = "1.7.3"
+coroutines = "1.8.0"
 jetbrains-compose = "1.6.0-rc01"
 compose-plugin = "1.5.9"
 
@@ -27,7 +27,7 @@ kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collec
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
 # Coroutines
-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
 [plugins]
