@@ -1,5 +1,4 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -71,8 +70,6 @@ dependencies {
     implementation("io.github.alaksion:unsplash-wrapper:0.0.1")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
-    implementation("androidx.activity:activity-compose:1.8.2")
 
     // Compose
     implementation(platform(libs.compose.bom))
@@ -80,15 +77,22 @@ dependencies {
     implementation(libs.compose.graphics)
     implementation(libs.compose.tooling)
     implementation(libs.compose.material3)
+    implementation(libs.compose.activity)
 
     // Compose Test
     androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 
+    // Compose Debug
+    debugImplementation(libs.compose.tooling)
+    debugImplementation(libs.compose.test.manifest)
+
+    // Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation(libs.compose.tooling)
-    debugImplementation(libs.compose.test.manifest)
+
+    // Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
 }
