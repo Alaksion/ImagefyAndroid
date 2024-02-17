@@ -79,7 +79,7 @@ dependencies {
     implementation(compose.material3)
     implementation(compose.materialIconsExtended)
     implementation(libs.compose.activity)
-
+    implementation(libs.kamel)
 
     // Compose Debug
     debugImplementation(compose.uiTooling)
@@ -87,8 +87,7 @@ dependencies {
     debugImplementation(compose.uiTest)
 
     // Test
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation(kotlin("test"))
 
     // Kotlin
     implementation(libs.kotlinx.datetime)
