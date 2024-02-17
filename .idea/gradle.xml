@@ -11,7 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/platform" />
-            <option value="$PROJECT_DIR$/platform/stateviewmodel" />
+            <option value="$PROJECT_DIR$/platform/state-screenmodel" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
