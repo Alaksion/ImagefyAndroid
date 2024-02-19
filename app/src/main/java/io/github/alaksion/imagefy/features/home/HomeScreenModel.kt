@@ -25,14 +25,14 @@ internal class HomeScreenModel(
     initialState = HomeState()
 ) {
     private var isInitialized = false
-    private var currentPage = 0
+    private var currentPage = 1
 
     fun initialize() {
         if (isInitialized) return
         setState(
             block = {
                 val photos = photosRepository.getPhotos(
-                    page = 0,
+                    page = currentPage,
                     resultsPerPage = PAGE_LIMIT,
                     orderBy = this.orderBy
                 )
@@ -41,6 +41,7 @@ internal class HomeScreenModel(
                 )
             },
         )
+        isInitialized = true
     }
 
     fun loadNextPage() {
