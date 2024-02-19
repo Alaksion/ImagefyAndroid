@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -32,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import io.github.alaksion.imagefy.design.modifiers.shimmer
 import io.github.alaksion.imagefy.design.tokens.UnsplashSpacing
 import io.github.alaksion.unsplashwrapper.api.photos.domain.domain.models.listphotos.ListPhoto
+import io.kamel.core.isLoading
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
@@ -74,6 +74,7 @@ private fun Header(
     profileImageUrl: String,
     modifier: Modifier = Modifier
 ) {
+    val painter = asyncPainterResource(data = profileImageUrl)
 
     Row(
         modifier = modifier,
@@ -84,14 +85,11 @@ private fun Header(
             modifier = Modifier
                 .size(32.dp)
                 .clip(CircleShape)
-                .shadow(1.dp),
+                .shadow(1.dp)
+                .shimmer(painter.isLoading),
             contentDescription = null,
-            resource = asyncPainterResource(data = profileImageUrl),
-            onLoading = {
-                Box(
-                    modifier = Modifier.shimmer()
-                )
-            },
+            resource = painter,
+            onLoading = {},
             onFailure = {
                 Box(modifier = Modifier.background(Color.Red))
             },
@@ -115,20 +113,14 @@ private fun Photo(
     modifier: Modifier = Modifier,
     url: String
 ) {
+    val painter = asyncPainterResource(data = url)
+
     KamelImage(
-        modifier = modifier,
+        modifier = modifier.shimmer(painter.isLoading),
         contentDescription = null,
         resource = asyncPainterResource(data = url),
-        onLoading = {
-            Box(
-                modifier = Modifier
-                    .shimmer()
-                    .fillMaxSize()
-            )
-        },
-        onFailure = {
-            Box(modifier = Modifier.background(Color.Red))
-        },
+        onLoading = {},
+        onFailure = { Box(modifier = Modifier.background(Color.Red)) },
     )
 }
 
