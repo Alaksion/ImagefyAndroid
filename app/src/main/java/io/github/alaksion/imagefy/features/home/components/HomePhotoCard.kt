@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import io.github.alaksion.imagefy.design.modifiers.shimmer
 import io.github.alaksion.imagefy.design.tokens.UnsplashSpacing
 import io.github.alaksion.unsplashwrapper.api.photos.domain.domain.models.listphotos.ListPhoto
+import io.github.alaksion.unsplashwrapper.platform.color.toComposeColor
 import io.kamel.core.isLoading
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -55,7 +56,8 @@ internal fun HomePhotoCard(
         )
         Photo(
             url = data.urls.regular,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            color = data.color.toComposeColor()
         )
         Footer(
             description = data.description,
@@ -111,15 +113,16 @@ private fun Header(
 @Composable
 private fun Photo(
     modifier: Modifier = Modifier,
-    url: String
+    url: String,
+    color: Color,
 ) {
-    val painter = asyncPainterResource(data = url)
-
     KamelImage(
-        modifier = modifier.shimmer(painter.isLoading),
+        modifier = modifier,
         contentDescription = null,
         resource = asyncPainterResource(data = url),
-        onLoading = {},
+        onLoading = {
+            Box(Modifier.background(color))
+        },
         onFailure = { Box(modifier = Modifier.background(Color.Red)) },
     )
 }
