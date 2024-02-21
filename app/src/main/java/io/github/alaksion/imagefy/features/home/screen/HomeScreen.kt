@@ -1,4 +1,4 @@
-package io.github.alaksion.imagefy.features.screen
+package io.github.alaksion.imagefy.features.home.screen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
-import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import io.github.alaksion.imagefy.features.home.tabs.HomeTab
@@ -35,9 +34,7 @@ internal class HomeScreen : Screen {
     fun HomeScreenContent() {
         TabNavigator(
             FeedTab,
-        ) {
-            val tabNavigator = LocalTabNavigator.current
-
+        ) { navigator ->
             Scaffold(
                 content = { scaffoldPadding ->
                     Surface(modifier = Modifier.padding(scaffoldPadding)) {
@@ -47,10 +44,10 @@ internal class HomeScreen : Screen {
                 bottomBar = {
                     BottomBar(
                         modifier = Modifier.fillMaxWidth(),
-                        selectedTab = tabNavigator.current,
+                        selectedTab = navigator.current,
                         onTabSelected = { selectedTab ->
-                            tabNavigator.current = selectedTab
-                        }
+                            navigator.current = selectedTab
+                        },
                     )
                 }
             )
@@ -72,21 +69,19 @@ internal class HomeScreen : Screen {
             )
         }
         BottomAppBar(
-            modifier = modifier
-        ) {
-            items.forEach { tab ->
-                val icon = remember(tab) {
-                    if (selectedTab == tab) tab.selectedIcon else tab.unselectedIcon
-                }
-                IconButton(
-                    onClick = { onTabSelected(tab) }
-                ) {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = tab.contentDescription
-                    )
+            modifier = modifier,
+            actions = {
+                items.forEach { tab ->
+                    IconButton(
+                        onClick = { onTabSelected(tab) }
+                    ) {
+                        Icon(
+                            imageVector = if (selectedTab == tab) tab.selectedIcon else tab.unselectedIcon,
+                            contentDescription = tab.contentDescription
+                        )
+                    }
                 }
             }
-        }
+        )
     }
 }

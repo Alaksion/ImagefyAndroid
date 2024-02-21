@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
 import cafe.adriel.voyager.navigator.Navigator
 import io.github.alaksion.imagefy.di.appModule
-import io.github.alaksion.imagefy.features.screen.HomeScreen
+import io.github.alaksion.imagefy.features.home.screen.HomeScreen
 import io.github.alaksion.imagefy.ui.theme.ImagefyTheme
 import io.github.alaksion.unsplashwrapper.sdk.UnsplashWrapperSdk
 import org.kodein.di.compose.rememberDI
