@@ -94,8 +94,7 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
 
     // Voyager
-    implementation(libs.voyager.core)
-    implementation(libs.voyager.kodein)
+    implementation(libs.bundles.voyager)
 
     // DI
     implementation(libs.kodein)

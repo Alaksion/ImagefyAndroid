@@ -37,7 +37,7 @@ import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
 @Composable
-internal fun HomePhotoCard(
+internal fun FeedPhotoCard(
     data: ListPhoto,
     modifier: Modifier = Modifier,
     showSpacer: Boolean,

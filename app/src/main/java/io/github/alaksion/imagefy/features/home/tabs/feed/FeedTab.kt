@@ -5,16 +5,34 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
-import io.github.alaksion.imagefy.features.home.tabs.feed.components.HomePhotoCard
+import cafe.adriel.voyager.navigator.tab.TabOptions
+import io.github.alaksion.imagefy.features.home.tabs.HomeTab
+import io.github.alaksion.imagefy.features.home.tabs.feed.components.FeedPhotoCard
 
-internal class FeedScreen : Screen {
+internal object FeedTab : HomeTab {
+
+    override val unselectedIcon = Icons.Outlined.Home
+    override val selectedIcon = Icons.Filled.Home
+    override val contentDescription = "Feed tab"
+    override val options: TabOptions
+        @Composable
+        get() = remember {
+            TabOptions(
+                index = 0u,
+                title = "",
+                icon = null
+            )
+        }
 
     @Composable
     override fun Content() {
@@ -22,7 +40,7 @@ internal class FeedScreen : Screen {
         val state by model.state.collectAsState()
         LaunchedEffect(key1 = model) { model.initialize() }
 
-        FeedScreenContent(
+        FeedTabContent(
             state = state.data,
         )
     }
@@ -30,7 +48,7 @@ internal class FeedScreen : Screen {
 }
 
 @Composable
-private fun FeedScreenContent(
+private fun FeedTabContent(
     state: FeedState,
 ) {
     Column {
@@ -43,7 +61,7 @@ private fun FeedScreenContent(
                 items = state.photos,
                 key = { _, item -> item.id }
             ) { index, photo ->
-                HomePhotoCard(
+                FeedPhotoCard(
                     data = photo,
                     modifier = Modifier.fillMaxWidth(),
                     showSpacer = index != state.photos.lastIndex
