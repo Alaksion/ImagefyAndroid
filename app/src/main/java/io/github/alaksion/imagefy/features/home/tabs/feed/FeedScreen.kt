@@ -1,4 +1,4 @@
-package io.github.alaksion.imagefy.features.home
+package io.github.alaksion.imagefy.features.home.tabs.feed
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,17 +12,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
-import io.github.alaksion.imagefy.features.home.components.HomePhotoCard
+import io.github.alaksion.imagefy.features.home.tabs.feed.components.HomePhotoCard
 
-internal class HomeScreen : Screen {
+internal class FeedScreen : Screen {
 
     @Composable
     override fun Content() {
-        val model: HomeScreenModel = rememberScreenModel()
+        val model: FeedScreenModel = rememberScreenModel()
         val state by model.state.collectAsState()
         LaunchedEffect(key1 = model) { model.initialize() }
 
-        HomeScreenContent(
+        FeedScreenContent(
             state = state.data,
         )
     }
@@ -30,8 +30,8 @@ internal class HomeScreen : Screen {
 }
 
 @Composable
-private fun HomeScreenContent(
-    state: HomeState,
+private fun FeedScreenContent(
+    state: FeedState,
 ) {
     Column {
         LazyColumn(

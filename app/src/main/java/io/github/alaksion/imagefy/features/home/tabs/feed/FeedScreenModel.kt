@@ -1,4 +1,4 @@
-package io.github.alaksion.imagefy.features.home
+package io.github.alaksion.imagefy.features.home.tabs.feed
 
 import io.github.alaksion.stateviewmodel.StateScreenModel
 import io.github.alaksion.unsplashwrapper.api.photos.domain.domain.models.listphotos.ListPhoto
@@ -11,18 +11,18 @@ import kotlinx.coroutines.CoroutineDispatcher
 
 private const val PAGE_LIMIT = 10
 
-internal data class HomeState(
+internal data class FeedState(
     val photos: ImmutableList<ListPhoto> = persistentListOf(),
     val orderBy: ListPhotoOrderBy = ListPhotoOrderBy.Latest,
     val showLoadingIndicator: Boolean = false,
 )
 
-internal class HomeScreenModel(
+internal class FeedScreenModel(
     dispatcher: CoroutineDispatcher,
     private val photosRepository: UnsplashPhotosRepository,
-) : StateScreenModel<HomeState>(
+) : StateScreenModel<FeedState>(
     dispatcher = dispatcher,
-    initialState = HomeState()
+    initialState = FeedState()
 ) {
     private var isInitialized = false
     private var currentPage = 1

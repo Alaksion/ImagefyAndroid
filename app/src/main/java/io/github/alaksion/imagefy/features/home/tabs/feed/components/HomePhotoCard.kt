@@ -1,4 +1,4 @@
-package io.github.alaksion.imagefy.features.home.components
+package io.github.alaksion.imagefy.features.home.tabs.feed.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

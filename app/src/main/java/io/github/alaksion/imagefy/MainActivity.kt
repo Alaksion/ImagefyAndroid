@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
 import cafe.adriel.voyager.navigator.Navigator
 import io.github.alaksion.imagefy.di.appModule
-import io.github.alaksion.imagefy.features.home.HomeScreen
+import io.github.alaksion.imagefy.features.home.tabs.feed.FeedScreen
 import io.github.alaksion.imagefy.ui.theme.ImagefyTheme
 import io.github.alaksion.unsplashwrapper.sdk.UnsplashWrapperSdk
 import org.kodein.di.compose.rememberDI
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
 
                 ImagefyTheme {
                     Navigator(
-                        screens = listOf(HomeScreen()),
+                        screens = listOf(FeedScreen()),
                         key = "main-navigator"
                     )
                 }
