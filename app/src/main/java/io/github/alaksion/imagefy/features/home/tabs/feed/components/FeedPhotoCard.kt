@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.toColorInt
 import io.github.alaksion.imagefy.design.modifiers.shimmer
 import io.github.alaksion.imagefy.design.tokens.UnsplashSpacing
 import io.github.alaksion.unsplashwrapper.api.photos.domain.domain.models.listphotos.ListPhoto
@@ -57,7 +58,6 @@ internal fun FeedPhotoCard(
         Photo(
             url = data.urls.regular,
             modifier = Modifier.fillMaxWidth(),
-            color = data.color.toComposeColor()
         )
         Footer(
             description = data.description,
@@ -114,15 +114,12 @@ private fun Header(
 private fun Photo(
     modifier: Modifier = Modifier,
     url: String,
-    color: Color,
 ) {
     KamelImage(
         modifier = modifier,
         contentDescription = null,
         resource = asyncPainterResource(data = url),
-        onLoading = {
-            Box(Modifier.background(color))
-        },
+        onLoading = {},
         onFailure = { Box(modifier = Modifier.background(Color.Red)) },
     )
 }
