@@ -11,12 +11,12 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 fun ColumnScope.Spacer(weight: Float) {
-    Spacer(modifier = Modifier.weight(1f))
+    Spacer(modifier = Modifier.weight(weight))
 }
 
 @Composable
 fun RowScope.Spacer(weight: Float) {
-    Spacer(modifier = Modifier.weight(1f))
+    Spacer(modifier = Modifier.weight(weight))
 }
 
 @Composable
