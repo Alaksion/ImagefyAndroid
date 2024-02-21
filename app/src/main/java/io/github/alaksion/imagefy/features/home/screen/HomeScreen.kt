@@ -28,8 +28,6 @@ internal class HomeScreen : Screen {
     override fun Content() {
         HomeScreenContent()
     }
-
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     fun HomeScreenContent() {
         TabNavigator(
