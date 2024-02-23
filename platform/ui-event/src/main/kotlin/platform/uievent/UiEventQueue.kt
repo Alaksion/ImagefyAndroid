@@ -23,13 +23,13 @@ class UiEventQueueHandler<T> : UiEventQueue<T> {
     override val events: StateFlow<List<UiEvent<T>>> = _events
 
     override fun emitEvent(event: T) {
+        if (_events.value.size > 0) return
         _events.update { it + UiEvent(data = event, id = UUID.randomUUID().toString()) }
     }
 
     override fun consumeEvent(consumedEvent: UiEvent<T>) {
         _events.update { eventQueue ->
             eventQueue.filter { it.id == consumedEvent.id }
-
         }
     }
 
