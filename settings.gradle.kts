@@ -22,3 +22,4 @@ rootProject.name = "Imagefy"
 include(":app")
 include(":platform:state-screenmodel")
 include(":platform:ui-event")
+include(":platform:session")
