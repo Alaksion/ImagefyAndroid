@@ -10,13 +10,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import io.github.alaksion.imagefy.features.home.screen.HomeScreen
+import platform.uievent.UiEventEffect
+import platform.uievent.UiEventQueue
 
 internal class PreLoginScreen : Screen {
 
     @Composable
     override fun Content() {
         val model = rememberScreenModel<PreLoginScreenModel>()
+
         LaunchedEffect(key1 = model) { model.initialize() }
+        Events(source = model)
 
         Scaffold {
             Box(
@@ -26,5 +32,21 @@ internal class PreLoginScreen : Screen {
                 CircularProgressIndicator()
             }
         }
+    }
+
+    @Composable
+    private fun Events(
+        source: UiEventQueue<PreLoginEvents>
+    ) {
+        val navigator = LocalNavigator.current
+
+        UiEventEffect(
+            eventSource = source,
+            onEvent = { event ->
+                when (event) {
+                    PreLoginEvents.Proceed -> navigator?.replaceAll(HomeScreen())
+                }
+            }
+        )
     }
 }

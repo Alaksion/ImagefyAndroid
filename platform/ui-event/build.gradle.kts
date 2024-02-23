@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm")
     `java-library`
+    alias(libs.plugins.jetbrains.compose)
 }
 
 dependencies {
@@ -8,4 +9,5 @@ dependencies {
     implementation(libs.coroutines.core)
     testImplementation(kotlin("test"))
     testImplementation(libs.coroutines.test)
+    implementation(compose.ui)
 }

@@ -101,6 +101,7 @@ dependencies {
 
     // Projects
     implementation(projects.platform.stateScreenmodel)
+    implementation(projects.platform.uiEvent)
     implementation(projects.platform.session)
 
 }
