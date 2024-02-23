@@ -5,7 +5,7 @@ import io.github.alaksion.unsplashwrapper.api.currentuser.domain.model.CurrentUs
 
 interface SessionHandler {
     val currentUser: CurrentUser?
-    suspend fun refreshUser(): CurrentUser
+    suspend fun refreshUser()
 }
 
 internal class SessionHandlerImpl(
@@ -15,9 +15,10 @@ internal class SessionHandlerImpl(
 
     override val currentUser: CurrentUser? = userSingleton.currentUser
 
-    override suspend fun refreshUser(): CurrentUser {
-        val user = userRepository.getCurrentUser()
-        userSingleton.currentUser = user
-        return user
+    override suspend fun refreshUser() {
+        if (userRepository.isUserLoggedIn()) {
+            val user = userRepository.getCurrentUser()
+            userSingleton.currentUser = user
+        }
     }
 }

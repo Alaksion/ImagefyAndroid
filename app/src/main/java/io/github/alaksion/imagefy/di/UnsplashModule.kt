@@ -1,5 +1,6 @@
 package io.github.alaksion.imagefy.di
 
+import io.github.alaksion.unsplashwrapper.api.currentuser.domain.UnsplashCurrentUserRepository
 import io.github.alaksion.unsplashwrapper.api.photos.domain.repository.UnsplashPhotosRepository
 import io.github.alaksion.unsplashwrapper.api.search.domain.repository.UnsplashSearchRepository
 import io.github.alaksion.unsplashwrapper.platform.authentication.UnsplashAuth
@@ -25,6 +26,11 @@ val unsplashModule = DI.Module("app-unsplash-module") {
     bindSingleton<UnsplashPhotosRepository> {
         val sdk = instance<UnsplashWrapperSdk>()
         sdk.photosRepository
+    }
+
+    bindSingleton<UnsplashCurrentUserRepository> {
+        val sdk = instance<UnsplashWrapperSdk>()
+        sdk.currentUserRepository
     }
 
 }
