@@ -8,6 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import io.github.alaksion.imagefy.features.home.tabs.HomeTab
+import io.github.alaksion.unsplashwrapper.platform.authentication.UnsplashAuth
+import org.kodein.di.compose.localDI
+import org.kodein.di.instance
 
 internal object ProfileTab : HomeTab {
     override val unselectedIcon = Icons.Outlined.Person
@@ -25,6 +28,13 @@ internal object ProfileTab : HomeTab {
 
     @Composable
     override fun Content() {
-        Text("Profile tab")
+        val auth = localDI().instance<UnsplashAuth>()
+    }
+
+    @Composable
+    fun ProfileTabContent(
+        onRequestLogin: () -> Unit
+    ) {
+
     }
 }
