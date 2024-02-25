@@ -18,7 +18,7 @@ val homeModule = DI.Module("home-di") {
     bindProvider {
         ProfileTabScreenModel(
             dispatcher = Dispatchers.Default,
-            auth = instance()
+            sessionHandler = instance()
         )
     }
 }
