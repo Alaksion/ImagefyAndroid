@@ -1,0 +1,68 @@
+package io.github.alaksion.imagefy.features.prelogin.loginhandler
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ErrorOutline
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.kodein.rememberScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import io.github.alaksion.imagefy.design.components.ErrorView
+import io.github.alaksion.imagefy.features.home.screen.HomeScreen
+import io.github.alaksion.stateviewmodel.View
+import platform.uievent.UiEventEffect
+
+internal class LoginHandlerScreen : Screen {
+
+    @Composable
+    override fun Content() {
+        val model = rememberScreenModel<LoginHandlerScreenModel>()
+        val state by model.state.collectAsState()
+        val navigator = LocalNavigator.current
+
+        UiEventEffect(eventSource = model) { event ->
+            when (event) {
+                LoginHandlerEvents.Success -> navigator?.replaceAll(HomeScreen())
+            }
+        }
+
+        LaunchedEffect(Unit) {
+
+        }
+
+        Scaffold {
+            state.View(
+                contentView = { },
+                errorView = {
+                    ErrorView(
+                        title = "Login error title",
+                        description = "Login error description",
+                        icon = Icons.Outlined.ErrorOutline
+                    )
+                },
+                loadingView = {
+                    LoadingView(Modifier.padding(it))
+                }
+            )
+        }
+    }
+
+    @Composable
+    private fun LoadingView(modifier: Modifier = Modifier) {
+        Box(
+            modifier = modifier,
+            contentAlignment = Alignment.Center,
+        ) {
+            CircularProgressIndicator()
+        }
+    }
+
+}

@@ -8,7 +8,7 @@ fun <T> UiState<T>.View(
     errorView: @Composable Throwable.() -> Unit,
     loadingView: @Composable () -> Unit
 ) {
-    when(this.mode) {
+    when (this.mode) {
         UiMode.Content -> contentView()
         UiMode.Loading -> loadingView()
         is UiMode.Error -> this.mode.error.errorView()

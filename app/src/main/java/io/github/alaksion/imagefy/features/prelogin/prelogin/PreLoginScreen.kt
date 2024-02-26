@@ -1,4 +1,4 @@
-package io.github.alaksion.imagefy.features.prelogin.screen
+package io.github.alaksion.imagefy.features.prelogin.prelogin
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding

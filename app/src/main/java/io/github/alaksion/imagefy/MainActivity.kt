@@ -1,12 +1,15 @@
 package io.github.alaksion.imagefy
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
 import cafe.adriel.voyager.navigator.Navigator
 import io.github.alaksion.imagefy.di.appModule
-import io.github.alaksion.imagefy.features.prelogin.screen.PreLoginScreen
+import io.github.alaksion.imagefy.features.prelogin.loginhandler.LoginHandlerScreen
+import io.github.alaksion.imagefy.features.prelogin.prelogin.PreLoginScreen
+import io.github.alaksion.imagefy.intenthandler.IntentListener
 import io.github.alaksion.imagefy.ui.theme.ImagefyTheme
 import io.github.alaksion.unsplashwrapper.sdk.UnsplashWrapperSdk
 import org.kodein.di.compose.rememberDI
@@ -32,7 +35,13 @@ class MainActivity : ComponentActivity() {
                     Navigator(
                         screens = listOf(PreLoginScreen()),
                         key = "main-navigator"
-                    )
+                    ) { navigator ->
+                        IntentListener { intent ->
+                            if (Intent.ACTION_VIEW == intent.action) {
+                                navigator.push(LoginHandlerScreen())
+                            }
+                        }
+                    }
                 }
             }
         }

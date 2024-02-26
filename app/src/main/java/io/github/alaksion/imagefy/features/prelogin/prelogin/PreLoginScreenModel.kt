@@ -1,4 +1,4 @@
-package io.github.alaksion.imagefy.features.prelogin.screen
+package io.github.alaksion.imagefy.features.prelogin.prelogin
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope

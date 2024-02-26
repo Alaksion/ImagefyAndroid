@@ -1,6 +1,7 @@
 package io.github.alaksion.imagefy.features.prelogin
 
-import io.github.alaksion.imagefy.features.prelogin.screen.PreLoginScreenModel
+import io.github.alaksion.imagefy.features.prelogin.loginhandler.LoginHandlerScreenModel
+import io.github.alaksion.imagefy.features.prelogin.prelogin.PreLoginScreenModel
 import kotlinx.coroutines.Dispatchers
 import org.kodein.di.DI
 import org.kodein.di.bindProvider
@@ -11,6 +12,12 @@ internal val preloginModule = DI.Module("prelogin") {
         PreLoginScreenModel(
             sessionHandler = instance(),
             dispatcher = Dispatchers.Default
+        )
+    }
+    bindProvider {
+        LoginHandlerScreenModel(
+            dispatcher = Dispatchers.Default,
+            authHandler = instance()
         )
     }
 }
