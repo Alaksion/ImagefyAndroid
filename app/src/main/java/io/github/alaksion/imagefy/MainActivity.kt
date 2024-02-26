@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
+import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import io.github.alaksion.imagefy.di.appModule
 import io.github.alaksion.imagefy.features.prelogin.loginhandler.LoginHandlerScreen
@@ -36,6 +37,7 @@ class MainActivity : ComponentActivity() {
                         screens = listOf(PreLoginScreen()),
                         key = "main-navigator"
                     ) { navigator ->
+                        CurrentScreen()
                         IntentListener { intent ->
                             if (Intent.ACTION_VIEW == intent.action) {
                                 navigator.push(LoginHandlerScreen())
