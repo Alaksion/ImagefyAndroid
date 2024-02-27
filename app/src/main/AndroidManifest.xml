@@ -25,12 +25,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter android:label="ImagefyAuth">
+            <intent-filter
+                android:autoVerify="true"
+                android:label="ImagefyAuth">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="imagefy"
-                    android:host="auth" />
+
+                <data
+                    android:host="imagefy/callback"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
     </application>
