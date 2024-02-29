@@ -66,7 +66,9 @@ abstract class StateScreenModel<T>(
         block: suspend () -> Unit,
         showLoading: Boolean = true,
     ): Job = updateState(
-        block = { block() },
+        block = {
+            block()
+        },
         showLoading = showLoading
     )
 
