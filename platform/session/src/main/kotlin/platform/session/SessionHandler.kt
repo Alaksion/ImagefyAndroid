@@ -13,7 +13,10 @@ internal class SessionHandlerImpl(
     private val userRepository: UnsplashCurrentUserRepository,
 ) : SessionHandler {
 
-    override val currentUser: CurrentUser? = userSingleton.currentUser
+    override val currentUser: CurrentUser?
+        get() {
+            return userSingleton.currentUser
+        }
 
     override suspend fun refreshUser() {
         if (userRepository.isUserLoggedIn()) {
