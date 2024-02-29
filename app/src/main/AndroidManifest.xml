@@ -19,23 +19,22 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Imagefy">
+            android:theme="@style/Theme.Imagefy"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter
-                android:autoVerify="true"
-                android:label="ImagefyAuth">
-                <action android:name="android.intent.action.VIEW" />
 
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="imagefy/callback"
-                    android:scheme="https" />
+                <data android:scheme="https" />
+                <data android:host="imagefy" />
+                <data android:path="/callback"/>
             </intent-filter>
         </activity>
     </application>

@@ -20,7 +20,9 @@ import io.github.alaksion.imagefy.features.home.screen.HomeScreen
 import io.github.alaksion.stateviewmodel.View
 import platform.uievent.UiEventEffect
 
-internal class LoginHandlerScreen : Screen {
+internal class LoginHandlerScreen(
+    private val authCode: String
+) : Screen {
 
     @Composable
     override fun Content() {
@@ -35,7 +37,7 @@ internal class LoginHandlerScreen : Screen {
         }
 
         LaunchedEffect(Unit) {
-
+            model.handleLogin(accessCode = authCode)
         }
 
         Scaffold {
