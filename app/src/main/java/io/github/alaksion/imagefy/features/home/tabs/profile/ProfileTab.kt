@@ -1,22 +1,29 @@
 package io.github.alaksion.imagefy.features.home.tabs.profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import io.github.alaksion.imagefy.Config
+import io.github.alaksion.imagefy.design.tokens.UnsplashSpacing
 import io.github.alaksion.imagefy.features.home.tabs.HomeTab
+import io.github.alaksion.imagefy.features.home.tabs.profile.components.ProfileForm
 import io.github.alaksion.unsplashwrapper.api.authorization.domain.model.AuthorizationScope
 import io.github.alaksion.unsplashwrapper.platform.authentication.UnsplashAuth
 import kotlinx.collections.immutable.persistentSetOf
@@ -62,16 +69,24 @@ internal object ProfileTab : HomeTab {
     }
 
     @Composable
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     fun ProfileTabContent(
         state: ProfileTabState,
         onRequestLogin: () -> Unit
     ) {
-        if (state.profile == null) {
-            Button(onClick = onRequestLogin) {
-                Text("Login")
+        Scaffold {
+            if (state.profile == null) {
+                Button(onClick = onRequestLogin) {
+                    Text("Login")
+                }
+            } else {
+                ProfileForm(
+                    data = state.profile,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(UnsplashSpacing.Large)
+                )
             }
-        } else {
-            Text(state.profile.firstName)
         }
     }
 }
