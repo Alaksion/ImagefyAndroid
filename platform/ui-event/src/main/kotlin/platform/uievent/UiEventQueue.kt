@@ -29,7 +29,7 @@ class UiEventQueueHandler<T> : UiEventQueue<T> {
 
     override fun consumeEvent(consumedEvent: UiEvent<T>) {
         _events.update { eventQueue ->
-            eventQueue.filter { it.id == consumedEvent.id }
+            eventQueue.filter { it.id != consumedEvent.id }
         }
     }
 
