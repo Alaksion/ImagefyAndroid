@@ -1,7 +1,7 @@
 package platform.session
 
-import io.github.alaksion.unsplashwrapper.api.currentuser.domain.UnsplashCurrentUserRepository
-import io.github.alaksion.unsplashwrapper.api.currentuser.domain.model.CurrentUser
+import io.github.alaksion.unsplashwrapper.api.models.currentuser.domain.CurrentUser
+import io.github.alaksion.unsplashwrapper.api.repositories.UnsplashCurrentUserRepository
 
 interface SessionHandler {
     val currentUser: CurrentUser?

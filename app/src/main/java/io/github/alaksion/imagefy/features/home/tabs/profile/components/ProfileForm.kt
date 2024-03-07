@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import io.github.alaksion.unsplashwrapper.api.currentuser.domain.model.CurrentUser
+import io.github.alaksion.unsplashwrapper.api.models.currentuser.domain.CurrentUser
 
 @Composable
 internal fun ProfileForm(

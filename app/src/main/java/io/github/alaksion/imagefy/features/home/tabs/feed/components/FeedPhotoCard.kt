@@ -28,11 +28,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.toColorInt
 import io.github.alaksion.imagefy.design.modifiers.shimmer
 import io.github.alaksion.imagefy.design.tokens.UnsplashSpacing
-import io.github.alaksion.unsplashwrapper.api.photos.domain.domain.models.listphotos.ListPhoto
-import io.github.alaksion.unsplashwrapper.platform.color.toComposeColor
+import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
 import io.kamel.core.isLoading
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource

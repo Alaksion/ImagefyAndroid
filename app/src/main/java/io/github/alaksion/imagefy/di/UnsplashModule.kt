@@ -1,8 +1,8 @@
 package io.github.alaksion.imagefy.di
 
-import io.github.alaksion.unsplashwrapper.api.currentuser.domain.UnsplashCurrentUserRepository
-import io.github.alaksion.unsplashwrapper.api.photos.domain.repository.UnsplashPhotosRepository
-import io.github.alaksion.unsplashwrapper.api.search.domain.repository.UnsplashSearchRepository
+import io.github.alaksion.unsplashwrapper.api.repositories.UnsplashCurrentUserRepository
+import io.github.alaksion.unsplashwrapper.api.repositories.UnsplashPhotosRepository
+import io.github.alaksion.unsplashwrapper.api.repositories.UnsplashSearchRepository
 import io.github.alaksion.unsplashwrapper.platform.authentication.UnsplashAuth
 import io.github.alaksion.unsplashwrapper.sdk.UnsplashWrapperSdk
 import org.kodein.di.DI

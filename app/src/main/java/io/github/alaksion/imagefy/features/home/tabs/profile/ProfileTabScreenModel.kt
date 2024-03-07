@@ -1,8 +1,7 @@
 package io.github.alaksion.imagefy.features.home.tabs.profile
 
 import io.github.alaksion.stateviewmodel.StateScreenModel
-import io.github.alaksion.unsplashwrapper.api.currentuser.domain.model.CurrentUser
-import io.github.alaksion.unsplashwrapper.platform.authentication.UnsplashAuth
+import io.github.alaksion.unsplashwrapper.api.models.currentuser.domain.CurrentUser
 import kotlinx.coroutines.CoroutineDispatcher
 import platform.session.SessionHandler
 

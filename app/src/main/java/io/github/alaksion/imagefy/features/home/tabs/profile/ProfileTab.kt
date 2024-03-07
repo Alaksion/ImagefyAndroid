@@ -24,7 +24,7 @@ import io.github.alaksion.imagefy.Config
 import io.github.alaksion.imagefy.design.tokens.UnsplashSpacing
 import io.github.alaksion.imagefy.features.home.tabs.HomeTab
 import io.github.alaksion.imagefy.features.home.tabs.profile.components.ProfileForm
-import io.github.alaksion.unsplashwrapper.api.authorization.domain.model.AuthorizationScope
+import io.github.alaksion.unsplashwrapper.api.models.authorization.domain.AuthorizationScope
 import io.github.alaksion.unsplashwrapper.platform.authentication.UnsplashAuth
 import kotlinx.collections.immutable.persistentSetOf
 import org.kodein.di.compose.localDI
