@@ -33,14 +33,19 @@ internal class SearchTabScreenModel(
 ) {
 
     private var currentPage = 0
+    private var isInitialized = false
 
-    fun search() = setState(
-        block = {
-            copy(
-                photos = getPhotos().results
-            )
+    fun search() {
+        setState(
+            block = {
+                copy(
+                    photos = getPhotos().results
+                )
+            }
+        ).invokeOnCompletion {
+            isInitialized = true
         }
-    )
+    }
 
     fun updateQuery(query: String) = setState(
         block = {
@@ -49,7 +54,7 @@ internal class SearchTabScreenModel(
     )
 
     fun loadNextPage() {
-        if (currentData.isLoadingNextPage) return
+        if (currentData.isLoadingNextPage || isInitialized.not()) return
         updateState(
             block = {
                 currentPage++
