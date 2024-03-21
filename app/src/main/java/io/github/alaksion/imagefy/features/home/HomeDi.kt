@@ -2,6 +2,7 @@ package io.github.alaksion.imagefy.features.home
 
 import io.github.alaksion.imagefy.features.home.tabs.feed.FeedScreenModel
 import io.github.alaksion.imagefy.features.home.tabs.profile.ProfileTabScreenModel
+import io.github.alaksion.imagefy.features.home.tabs.search.SearchTabScreenModel
 import io.github.alaksion.imagefy.features.home.tabs.settings.SettingsTabScreenModel
 import kotlinx.coroutines.Dispatchers
 import org.kodein.di.DI
@@ -28,6 +29,13 @@ val homeModule = DI.Module("home-di") {
             dispatcher = Dispatchers.Default,
             sessionHandler = instance(),
             authHandler = instance()
+        )
+    }
+
+    bindProvider {
+        SearchTabScreenModel(
+            dispatcher = Dispatchers.Default,
+            searchRepository = instance()
         )
     }
 }
