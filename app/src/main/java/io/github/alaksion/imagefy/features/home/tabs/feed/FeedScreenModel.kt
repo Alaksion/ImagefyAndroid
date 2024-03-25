@@ -1,6 +1,5 @@
 package io.github.alaksion.imagefy.features.home.tabs.feed
 
-import io.github.alaksion.stateviewmodel.StateScreenModel
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhotoOrderBy
 import io.github.alaksion.unsplashwrapper.api.repositories.UnsplashPhotosRepository
@@ -8,6 +7,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.stateScreenmodel.StateScreenModel
 
 private const val PAGE_LIMIT = 10
 

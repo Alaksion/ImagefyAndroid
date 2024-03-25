@@ -12,8 +12,8 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import io.github.alaksion.imagefy.features.home.screen.HomeScreen
-import platform.uievent.UiEventEffect
-import platform.uievent.UiEventQueue
+import multiplatform.uiEvent.UiEventEffect
+import multiplatform.uiEvent.UiEventQueue
 
 internal class PreLoginScreen : Screen {
 

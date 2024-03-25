@@ -1,11 +1,11 @@
 package io.github.alaksion.imagefy.features.home.tabs.settings
 
-import io.github.alaksion.stateviewmodel.StateScreenModel
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.stateScreenmodel.StateScreenModel
+import multiplatform.uiEvent.UiEventQueue
+import multiplatform.uiEvent.UiEventQueueHandler
 import platform.session.AuthHandler
 import platform.session.SessionHandler
-import platform.uievent.UiEventQueue
-import platform.uievent.UiEventQueueHandler
 
 internal class SettingsTabScreenModel(
     dispatcher: CoroutineDispatcher,

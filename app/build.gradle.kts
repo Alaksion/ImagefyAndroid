@@ -100,8 +100,8 @@ dependencies {
     implementation(libs.kodein)
 
     // Projects
-    implementation(projects.platform.stateScreenmodel)
-    implementation(projects.platform.uiEvent)
+    implementation(projects.multiplatform.stateScreenmodel)
+    implementation(projects.multiplatform.uiEvent)
     implementation(projects.platform.session)
 
 }

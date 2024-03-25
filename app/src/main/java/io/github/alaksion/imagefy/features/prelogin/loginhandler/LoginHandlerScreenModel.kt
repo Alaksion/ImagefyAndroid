@@ -1,12 +1,12 @@
 package io.github.alaksion.imagefy.features.prelogin.loginhandler
 
 import io.github.alaksion.imagefy.Config
-import io.github.alaksion.stateviewmodel.StateScreenModel
-import io.github.alaksion.stateviewmodel.UiMode
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.stateScreenmodel.StateScreenModel
+import multiplatform.stateScreenmodel.UiMode
+import multiplatform.uiEvent.UiEventQueue
+import multiplatform.uiEvent.UiEventQueueHandler
 import platform.session.AuthHandler
-import platform.uievent.UiEventQueue
-import platform.uievent.UiEventQueueHandler
 
 internal enum class LoginHandlerEvents {
     Success;

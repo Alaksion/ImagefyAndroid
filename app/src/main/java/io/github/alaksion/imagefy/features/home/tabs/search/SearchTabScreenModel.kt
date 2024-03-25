@@ -1,6 +1,5 @@
 package io.github.alaksion.imagefy.features.home.tabs.search
 
-import io.github.alaksion.stateviewmodel.StateScreenModel
 import io.github.alaksion.unsplashwrapper.api.models.parameters.PhotoOrientation
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.search.SearchPhotosColor
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.search.SearchPhotosContentFilter
@@ -12,6 +11,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.stateScreenmodel.StateScreenModel
 
 internal data class SearchTabState(
     val query: String = "",

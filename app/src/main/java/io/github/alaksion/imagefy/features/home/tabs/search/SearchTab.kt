@@ -13,7 +13,7 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import io.github.alaksion.imagefy.features.home.tabs.HomeTab
 import io.github.alaksion.imagefy.features.home.tabs.search.components.SearchTabAction
 import io.github.alaksion.imagefy.features.home.tabs.search.components.SearchTabContent
-import io.github.alaksion.stateviewmodel.View
+import multiplatform.stateScreenmodel.View
 
 internal object SearchTab : HomeTab {
     override val unselectedIcon = Icons.Outlined.Search

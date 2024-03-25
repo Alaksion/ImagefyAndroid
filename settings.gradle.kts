@@ -20,8 +20,6 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "Imagefy"
 include(":app")
-include(":platform:state-screenmodel")
-include(":platform:ui-event")
 include(":platform:session")
 include(":multiplatform:ui")
 include(":multiplatform:state-screenmodel")

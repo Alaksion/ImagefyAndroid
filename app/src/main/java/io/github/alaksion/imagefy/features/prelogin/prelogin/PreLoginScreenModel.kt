@@ -1,11 +1,11 @@
 package io.github.alaksion.imagefy.features.prelogin.prelogin
 
 
-import io.github.alaksion.stateviewmodel.StateScreenModel
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.stateScreenmodel.StateScreenModel
+import multiplatform.uiEvent.UiEventQueue
+import multiplatform.uiEvent.UiEventQueueHandler
 import platform.session.SessionHandler
-import platform.uievent.UiEventQueue
-import platform.uievent.UiEventQueueHandler
 
 internal enum class PreLoginEvents {
     Proceed;

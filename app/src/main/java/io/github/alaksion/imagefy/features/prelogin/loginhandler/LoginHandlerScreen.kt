@@ -17,8 +17,8 @@ import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import io.github.alaksion.imagefy.design.components.ErrorView
 import io.github.alaksion.imagefy.features.home.screen.HomeScreen
-import io.github.alaksion.stateviewmodel.View
-import platform.uievent.UiEventEffect
+import multiplatform.stateScreenmodel.View
+import multiplatform.uiEvent.UiEventEffect
 
 internal class LoginHandlerScreen(
     private val authCode: String

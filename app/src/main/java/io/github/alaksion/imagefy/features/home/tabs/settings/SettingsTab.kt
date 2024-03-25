@@ -15,7 +15,7 @@ import io.github.alaksion.imagefy.features.home.tabs.HomeTab
 import io.github.alaksion.imagefy.features.home.tabs.feed.FeedTab
 import io.github.alaksion.imagefy.features.home.tabs.settings.components.SettingsAction
 import io.github.alaksion.imagefy.features.home.tabs.settings.components.SettingsForm
-import platform.uievent.UiEventEffect
+import multiplatform.uiEvent.UiEventEffect
 
 internal object SettingsTab : HomeTab {
 

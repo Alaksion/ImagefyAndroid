@@ -1,8 +1,8 @@
 package io.github.alaksion.imagefy.features.home.tabs.profile
 
-import io.github.alaksion.stateviewmodel.StateScreenModel
 import io.github.alaksion.unsplashwrapper.api.models.currentuser.domain.CurrentUser
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.stateScreenmodel.StateScreenModel
 import platform.session.SessionHandler
 
 internal data class ProfileTabState(
