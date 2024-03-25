@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/multiplatform" />
+            <option value="$PROJECT_DIR$/multiplatform/state-screenmodel" />
             <option value="$PROJECT_DIR$/multiplatform/ui" />
             <option value="$PROJECT_DIR$/platform" />
             <option value="$PROJECT_DIR$/platform/session" />
