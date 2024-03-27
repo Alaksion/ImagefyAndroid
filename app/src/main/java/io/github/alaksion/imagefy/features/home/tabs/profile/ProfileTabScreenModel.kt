@@ -3,7 +3,7 @@ package io.github.alaksion.imagefy.features.home.tabs.profile
 import io.github.alaksion.unsplashwrapper.api.models.currentuser.domain.CurrentUser
 import kotlinx.coroutines.CoroutineDispatcher
 import multiplatform.stateScreenmodel.StateScreenModel
-import platform.session.SessionHandler
+import mutiplatform.session.SessionHandler
 
 internal data class ProfileTabState(
     val profile: CurrentUser? = null
@@ -11,7 +11,7 @@ internal data class ProfileTabState(
 
 internal class ProfileTabScreenModel(
     dispatcher: CoroutineDispatcher,
-    private val sessionHandler: SessionHandler,
+    private val sessionHandler: mutiplatform.session.SessionHandler,
 ) : StateScreenModel<ProfileTabState>(
     initialState = ProfileTabState(),
     dispatcher = dispatcher

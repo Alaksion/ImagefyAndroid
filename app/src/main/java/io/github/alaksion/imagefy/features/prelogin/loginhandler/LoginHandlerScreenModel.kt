@@ -6,7 +6,7 @@ import multiplatform.stateScreenmodel.StateScreenModel
 import multiplatform.stateScreenmodel.UiMode
 import multiplatform.uiEvent.UiEventQueue
 import multiplatform.uiEvent.UiEventQueueHandler
-import platform.session.AuthHandler
+import mutiplatform.session.AuthHandler
 
 internal enum class LoginHandlerEvents {
     Success;
@@ -14,7 +14,7 @@ internal enum class LoginHandlerEvents {
 
 internal class LoginHandlerScreenModel(
     dispatcher: CoroutineDispatcher,
-    private val authHandler: AuthHandler,
+    private val authHandler: mutiplatform.session.AuthHandler,
 ) : StateScreenModel<Unit>(
     dispatcher = dispatcher,
     initialMode = UiMode.Loading,

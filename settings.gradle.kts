@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         mavenLocal()
         google()
@@ -20,7 +20,8 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "Imagefy"
 include(":app")
-include(":platform:session")
 include(":multiplatform:ui")
 include(":multiplatform:state-screenmodel")
 include(":multiplatform:ui-event")
+include(":multiplatform:session")
+includeBuild("build-logic")

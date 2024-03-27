@@ -5,14 +5,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import multiplatform.stateScreenmodel.StateScreenModel
 import multiplatform.uiEvent.UiEventQueue
 import multiplatform.uiEvent.UiEventQueueHandler
-import platform.session.SessionHandler
+import mutiplatform.session.SessionHandler
 
 internal enum class PreLoginEvents {
     Proceed;
 }
 
 internal class PreLoginScreenModel(
-    private val sessionHandler: SessionHandler,
+    private val sessionHandler: mutiplatform.session.SessionHandler,
     dispatcher: CoroutineDispatcher
 ) : StateScreenModel<Unit>(
     initialState = Unit,

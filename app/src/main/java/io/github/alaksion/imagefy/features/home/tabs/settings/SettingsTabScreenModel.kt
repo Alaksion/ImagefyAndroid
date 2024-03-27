@@ -4,13 +4,13 @@ import kotlinx.coroutines.CoroutineDispatcher
 import multiplatform.stateScreenmodel.StateScreenModel
 import multiplatform.uiEvent.UiEventQueue
 import multiplatform.uiEvent.UiEventQueueHandler
-import platform.session.AuthHandler
-import platform.session.SessionHandler
+import mutiplatform.session.AuthHandler
+import mutiplatform.session.SessionHandler
 
 internal class SettingsTabScreenModel(
     dispatcher: CoroutineDispatcher,
-    private val sessionHandler: SessionHandler,
-    private val authHandler: AuthHandler,
+    private val sessionHandler: mutiplatform.session.SessionHandler,
+    private val authHandler: mutiplatform.session.AuthHandler,
 ) : StateScreenModel<SettingsTabState>(
     initialState = SettingsTabState(),
     dispatcher = dispatcher

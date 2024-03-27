@@ -102,6 +102,5 @@ dependencies {
     // Projects
     implementation(projects.multiplatform.stateScreenmodel)
     implementation(projects.multiplatform.uiEvent)
-    implementation(projects.platform.session)
 
 }
