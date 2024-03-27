@@ -3,7 +3,7 @@ package buildLogic.convention.plugins.kmp
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension
 
-internal fun Project.configureKotlinCocoapods(
+fun Project.configureKotlinCocoapods(
     extension: CocoapodsExtension
 ) = extension.apply {
 

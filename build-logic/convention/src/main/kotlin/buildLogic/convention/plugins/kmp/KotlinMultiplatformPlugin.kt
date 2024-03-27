@@ -16,7 +16,6 @@ class KotlinMultiplatformPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply(getPluginId("kotlinMultiplatform"))
                 apply(getPluginId("androidLibrary"))
-                apply(getPluginId("kotlinCocoapods"))
             }
 
             extensions.configure<KotlinMultiplatformExtension> {
