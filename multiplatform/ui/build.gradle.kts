@@ -1,19 +1,11 @@
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    id("io.github.alaksion.imagefyandroid.kmp")
     alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
 
-    androidTarget {
-        publishLibraryVariants("release")
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
 
     sourceSets {
         commonMain {
@@ -48,9 +40,15 @@ kotlin {
             }
         }
     }
-}
 
-android {
-    namespace = "io.github.alaksion.imagefy"
-    compileSdk = 34
+    cocoapods {
+        summary = "Unsplash client app shared code"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0" //your cocoapods version
+        ios.deploymentTarget = "14.1" //your iOS deployment target
+        framework {
+            isStatic = false
+            baseName = "unsplash-client"
+        }
+    }
 }

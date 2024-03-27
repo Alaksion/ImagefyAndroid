@@ -1,19 +1,10 @@
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    id("io.github.alaksion.imagefyandroid.kmp")
     alias(libs.plugins.jetbrains.compose)
 }
 
 kotlin {
 
-    androidTarget {
-        publishLibraryVariants("release")
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
 
     sourceSets {
         commonMain {
@@ -41,9 +32,4 @@ kotlin {
             }
         }
     }
-}
-
-android {
-    namespace = "multiplatform.uiEvent"
-    compileSdk = 34
 }
