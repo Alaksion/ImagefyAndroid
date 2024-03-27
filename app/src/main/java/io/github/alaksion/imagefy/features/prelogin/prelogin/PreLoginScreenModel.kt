@@ -12,7 +12,7 @@ internal enum class PreLoginEvents {
 }
 
 internal class PreLoginScreenModel(
-    private val sessionHandler: mutiplatform.session.SessionHandler,
+    private val sessionHandler: SessionHandler,
     dispatcher: CoroutineDispatcher
 ) : StateScreenModel<Unit>(
     initialState = Unit,
