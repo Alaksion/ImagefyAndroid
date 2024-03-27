@@ -1,10 +1,9 @@
 package buildLogic.convention.plugins.kmp
 
 import buildLogic.convention.BuildConstants
-import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-internal fun Project.configureKotlinMultiplatform(
+internal fun configureKotlinMultiplatform(
     extension: KotlinMultiplatformExtension
 ) = extension.apply {
 
@@ -18,6 +17,5 @@ internal fun Project.configureKotlinMultiplatform(
         }
     }
 
-//    ios()
-
+    iosX64()
 }
