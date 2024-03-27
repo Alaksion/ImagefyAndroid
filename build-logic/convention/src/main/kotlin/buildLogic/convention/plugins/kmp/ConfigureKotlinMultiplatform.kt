@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension
 internal fun Project.configureKotlinMultiplatform(
     extension: KotlinMultiplatformExtension
 ) = extension.apply {
+    jvmToolchain(17)
 
     // targets
     androidTarget {
@@ -23,7 +24,7 @@ internal fun Project.configureKotlinMultiplatform(
 
     ios()
 
-    (this as ExtensionAware).extensions.configure<CocoapodsExtension>() {
+    (this as ExtensionAware).extensions.configure<CocoapodsExtension> {
         configureKotlinCocoapods(this)
     }
 }

@@ -12,8 +12,12 @@ class KotlinMultiplatformPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            plugins.apply(getPluginId("kotlinMultiplatform"))
-            plugins.apply(getPluginId("androidLibrary"))
+
+            with(pluginManager) {
+                apply(getPluginId("kotlinMultiplatform"))
+                apply(getPluginId("androidLibrary"))
+                apply(getPluginId("kotlinCocoapods"))
+            }
 
             extensions.configure<KotlinMultiplatformExtension> {
                 configureKotlinMultiplatform(this)
