@@ -8,10 +8,12 @@ internal fun Project.configureAndroid(
     extension: LibraryExtension
 ) = extension.apply {
 
-    val projectName = path.split(":").drop(2).joinToString(separator = ".")
+    val projectName = path.split(":").drop(1)
+        .joinToString(separator = ".")
+        .replace("-", "")
 
     compileSdk = BuildConstants.ANDROID_COMPILE_SDK
-    namespace = "io.github.alaksion.imagefy-android.$projectName"
+    namespace = "io.github.alaksion.imagefyandroid.$projectName"
 
     defaultConfig {
         minSdk = BuildConstants.ANDROID_MIN_SDK
