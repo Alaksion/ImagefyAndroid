@@ -18,7 +18,6 @@ kotlin {
 
                 // Compose Multiplatform
                 implementation(compose.ui)
-                implementation(compose.uiTooling)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
 
@@ -33,6 +32,12 @@ kotlin {
             }
         }
 
+        androidMain {
+            dependencies {
+                implementation(compose.uiTooling)
+            }
+        }
+
         commonTest {
             dependencies {
                 kotlin("test")
@@ -42,6 +47,7 @@ kotlin {
     }
 
     cocoapods {
+        name = "unsplash-ui"
         summary = "Unsplash client app shared code"
         homepage = "Link to the Shared Module homepage"
         version = "1.0" //your cocoapods version
@@ -51,4 +57,5 @@ kotlin {
             baseName = "unsplash-client"
         }
     }
+
 }
