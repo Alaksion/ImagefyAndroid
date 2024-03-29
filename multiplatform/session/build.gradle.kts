@@ -7,7 +7,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-//                implementation("io.github.alaksion:unsplash-wrapper:0.0.1")
+                implementation("io.github.alaksion:unsplash-wrapper:0.0.1")
 
                 // Kotlin Multiplatform
                 implementation(libs.kotlinx.datetime)
