@@ -84,7 +84,7 @@ dependencies {
     // Compose Debug
     debugImplementation(compose.uiTooling)
     @OptIn(ExperimentalComposeLibrary::class)
-    debugImplementation(compose.uiTest)
+//    debugImplementation(compose.uiTest)
 
     // Test
     testImplementation(kotlin("test"))
