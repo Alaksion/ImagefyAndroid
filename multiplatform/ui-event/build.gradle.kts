@@ -1,9 +1,24 @@
 plugins {
-    id("io.github.alaksion.imagefyandroid.kmp")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrains.compose)
 }
 
 kotlin {
+
+    androidTarget {
+        publishLibraryVariants("release")
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "17"
+            }
+        }
+    }
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
     sourceSets {
         commonMain {
             dependencies {
@@ -15,8 +30,6 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.collections.immutable)
 
-                // Voyager
-                implementation(libs.bundles.voyager)
 
                 // Coroutines
                 implementation(libs.coroutines.core)
@@ -28,6 +41,26 @@ kotlin {
                 kotlin("test")
                 implementation(libs.coroutines.test)
             }
+        }
+    }
+}
+
+android {
+    compileSdk = 34
+    namespace = "multiplatform.uiEvent"
+
+    defaultConfig {
+        minSdk = 26
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }

@@ -1,7 +1,7 @@
 package buildLogic.convention.plugins.android
 
-import buildLogic.convention.BuildConstants
 import com.android.build.gradle.LibraryExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 
 internal fun Project.configureAndroid(
@@ -12,16 +12,16 @@ internal fun Project.configureAndroid(
         .joinToString(separator = ".")
         .replace("-", "")
 
-    compileSdk = BuildConstants.ANDROID_COMPILE_SDK
+    compileSdk = 34
     namespace = "io.github.alaksion.imagefyandroid.$projectName"
 
     defaultConfig {
-        minSdk = BuildConstants.ANDROID_MIN_SDK
+        minSdk = 26
     }
 
     compileOptions {
-        sourceCompatibility = BuildConstants.JAVA_VERSION
-        targetCompatibility = BuildConstants.JAVA_VERSION
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     packaging {

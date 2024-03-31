@@ -1,9 +1,23 @@
 plugins {
-    id("io.github.alaksion.imagefyandroid.kmp")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrains.compose)
 }
 
 kotlin {
+
+    androidTarget {
+        publishLibraryVariants("release")
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "17"
+            }
+        }
+    }
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
         commonMain {
@@ -29,6 +43,26 @@ kotlin {
                 kotlin("test")
                 implementation(libs.coroutines.test)
             }
+        }
+    }
+}
+
+android {
+    compileSdk = 34
+    namespace = "multiplatform.stateScreenmodel"
+
+    defaultConfig {
+        minSdk = 26
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
