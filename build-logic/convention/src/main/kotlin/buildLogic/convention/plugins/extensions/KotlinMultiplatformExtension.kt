@@ -1,10 +1,13 @@
-package buildLogic.convention.plugins.kmp
+package buildLogic.convention.plugins.extensions
 
 import buildLogic.convention.BuildConstants
 import org.gradle.api.Project
+import org.gradle.api.plugins.ExtensionAware
+import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension
 
-internal fun Project.configureKotlinMultiplatform(
+internal fun Project.kotlinMultiplatformExtension(
     extension: KotlinMultiplatformExtension
 ) = extension.apply {
     jvmToolchain(17)
@@ -22,4 +25,6 @@ internal fun Project.configureKotlinMultiplatform(
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+
+    (this as ExtensionAware).extensions.configure<CocoapodsExtension>(::cocoapodsExtension)
 }

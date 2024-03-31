@@ -1,10 +1,10 @@
-package buildLogic.convention.plugins.android
+package buildLogic.convention.plugins.extensions
 
 import buildLogic.convention.BuildConstants
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Project
 
-internal fun Project.configureAndroid(
+internal fun Project.androidLibraryExtension(
     extension: LibraryExtension
 ) = extension.apply {
 

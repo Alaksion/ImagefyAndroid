@@ -1,13 +1,13 @@
-package buildLogic.convention.plugins.kmp
+package buildLogic.convention.plugins.extensions
 
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension
 
-fun Project.configureKotlinCocoapods(
+internal fun Project.cocoapodsExtension(
     extension: CocoapodsExtension
 ) = extension.apply {
 
-    val moduleName = this@configureKotlinCocoapods.path.split(":").drop(1).joinToString("-")
+    val moduleName = path.split(":").drop(1).joinToString("-")
 
     summary = "Unsplash client app shared code"
     homepage = "Link to the Shared Module homepage"
