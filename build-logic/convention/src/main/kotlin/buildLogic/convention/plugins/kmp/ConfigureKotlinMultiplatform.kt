@@ -1,5 +1,6 @@
 package buildLogic.convention.plugins.kmp
 
+import buildLogic.convention.BuildConstants
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -13,7 +14,7 @@ internal fun Project.configureKotlinMultiplatform(
         publishLibraryVariants("release")
         compilations.all {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = BuildConstants.JVM_TARGET
             }
         }
     }
