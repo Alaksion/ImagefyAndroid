@@ -48,7 +48,10 @@ internal fun ImagefyTheme(
         else -> LightColorScheme
     }
 
-    StatusBarEffect(darkTheme)
+    StatusBarEffect(
+        darkTheme,
+        colorScheme
+    )
 
     MaterialTheme(
         colorScheme = colorScheme,
