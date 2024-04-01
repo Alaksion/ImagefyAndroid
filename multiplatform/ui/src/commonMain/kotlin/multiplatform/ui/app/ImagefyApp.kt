@@ -6,8 +6,10 @@ import androidx.compose.runtime.LaunchedEffect
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
+import io.github.alaksion.imagefy.features.prelogin.prelogin.PreLoginScreen
 import io.github.alaksion.unsplashwrapper.sdk.UnsplashWrapperSdk
 import kotlinx.coroutines.flow.collectLatest
+import multiplatform.ui.design.theme.ImagefyTheme
 import multiplatform.ui.di.appModule
 import org.kodein.di.compose.rememberInstance
 import org.kodein.di.compose.withDI
@@ -17,11 +19,13 @@ fun ImagefyApp(
     plugin: ImagefyAppPlugin
 ) {
     withDI(appModule) {
-        Navigator(
-            screens = listOf()
-        ) { navigator ->
-            AppEffects(plugin = plugin)
-            CurrentScreen()
+        ImagefyTheme {
+            Navigator(
+                screens = listOf(PreLoginScreen())
+            ) { _ ->
+                AppEffects(plugin = plugin)
+                CurrentScreen()
+            }
         }
     }
 }

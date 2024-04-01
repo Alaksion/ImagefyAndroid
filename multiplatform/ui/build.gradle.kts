@@ -12,6 +12,11 @@ kotlin {
             dependencies {
                 implementation("io.github.alaksion:unsplash-wrapper:0.0.1")
 
+                // Project
+                implementation(projects.multiplatform.session)
+                implementation(projects.multiplatform.uiEvent)
+                implementation(projects.multiplatform.stateScreenmodel)
+
                 // Kotlin Multiplatform
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.collections.immutable)
@@ -29,6 +34,9 @@ kotlin {
 
                 // Coroutines
                 implementation(libs.coroutines.core)
+
+                // Others
+                implementation(libs.kamel)
             }
         }
 
