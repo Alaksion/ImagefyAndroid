@@ -35,6 +35,7 @@ kotlin {
         androidMain {
             dependencies {
                 implementation(compose.uiTooling)
+                implementation(libs.compose.activity)
             }
         }
 
