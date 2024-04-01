@@ -12,6 +12,7 @@ import io.github.alaksion.imagefy.ui.theme.Purple80
 import io.github.alaksion.imagefy.ui.theme.PurpleGrey40
 import io.github.alaksion.imagefy.ui.theme.PurpleGrey80
 import io.github.alaksion.imagefy.ui.theme.Typography
+import multiplatform.ui.design.statusbar.StatusBarEffect
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -46,6 +47,8 @@ internal fun ImagefyTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
+    StatusBarEffect(darkTheme)
 
     MaterialTheme(
         colorScheme = colorScheme,
