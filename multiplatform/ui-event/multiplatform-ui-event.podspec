@@ -46,5 +46,5 @@ Pod::Spec.new do |spec|
             SCRIPT
         }
     ]
-    spec.resources = ['build\compose\ios\multiplatform-ui-event\compose-resources']
+    spec.resources = ['build/compose/ios/multiplatform-ui-event/compose-resources']
 end

@@ -46,5 +46,5 @@ Pod::Spec.new do |spec|
             SCRIPT
         }
     ]
-    spec.resources = ['build\compose\ios\multiplatform-state-screenmodel\compose-resources']
+    spec.resources = ['build/compose/ios/multiplatform-state-screenmodel/compose-resources']
 end
