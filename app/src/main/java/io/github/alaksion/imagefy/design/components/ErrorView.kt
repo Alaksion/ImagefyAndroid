@@ -39,7 +39,7 @@ internal fun ErrorView(
             contentDescription = null,
             modifier = Modifier
                 .size(64.dp)
-                .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+                .background(MaterialTheme.colorScheme.surface)
                 .clip(CircleShape)
                 .padding(UnsplashSpacing.XSmall2)
         )

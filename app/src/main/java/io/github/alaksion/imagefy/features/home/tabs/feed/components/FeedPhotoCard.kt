@@ -13,7 +13,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -62,7 +62,7 @@ internal fun FeedPhotoCard(
             modifier = Modifier.fillMaxWidth()
         )
         if (showSpacer) {
-            HorizontalDivider(modifier = Modifier.padding(vertical = UnsplashSpacing.XSmall2))
+            Divider(modifier = Modifier.padding(vertical = UnsplashSpacing.XSmall2))
         }
     }
 }
