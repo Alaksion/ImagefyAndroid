@@ -36,6 +36,7 @@ internal class SearchTabScreenModel(
     private var isInitialized = false
 
     fun search() {
+        if (isInitialized) return
         setState(
             block = {
                 copy(
