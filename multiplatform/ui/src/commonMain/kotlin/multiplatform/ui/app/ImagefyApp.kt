@@ -11,6 +11,7 @@ import io.github.alaksion.unsplashwrapper.sdk.UnsplashWrapperSdk
 import kotlinx.coroutines.flow.collectLatest
 import multiplatform.ui.design.theme.ImagefyTheme
 import multiplatform.ui.di.appModule
+import multiplatform.ui.screens.loginhandler.LoginHandlerScreen
 import org.kodein.di.compose.rememberInstance
 import org.kodein.di.compose.withDI
 
@@ -38,7 +39,13 @@ private fun AppEffects(
     val navigator = LocalNavigator.current
 
     LaunchedEffect(plugin.loginListener) {
-        plugin.loginListener.loginEvent.collectLatest { authCode -> }
+        plugin.loginListener.loginEvent.collectLatest { authCode ->
+            navigator?.push(
+                LoginHandlerScreen(
+                    authCode = authCode
+                )
+            )
+        }
     }
     DisposableEffect(plugin.loginListener) {
         onDispose { plugin.loginListener.onDispose() }
