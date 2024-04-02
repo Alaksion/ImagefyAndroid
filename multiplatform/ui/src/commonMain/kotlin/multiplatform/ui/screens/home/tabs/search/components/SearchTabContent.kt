@@ -34,19 +34,5 @@ internal fun SearchTabContent(
         ) {
             Text(it.user.name)
         }
-        item {
-            if (state.isLoadingNextPage) {
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
-            } else {
-                LaunchedEffect(key1 = Unit) {
-                    onAction(SearchTabAction.RequestNextPage)
-                }
-            }
-        }
     }
 }

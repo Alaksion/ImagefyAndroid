@@ -39,10 +39,13 @@ internal class SearchTabScreenModel(
         if (isInitialized) return
         setState(
             block = {
-                throw IllegalArgumentException()
+                val fetchPhotos = getPhotos()
+                this.copy(
+                    photos = fetchPhotos.results
+                )
             }
         )
-        isInitialized = true
+        isInitialized = false
     }
 
     fun updateQuery(query: String) = setState(

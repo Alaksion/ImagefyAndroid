@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Close
-import androidx.compose.material.icons.outlined.Error
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -19,7 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import multiplatform.stateScreenmodel.UiMode
+import multiplatform.stateScreenmodel.View
 import multiplatform.ui.design.ErrorView
 import multiplatform.ui.design.Spacer
 import multiplatform.ui.screens.home.tabs.HomeTab
@@ -48,8 +47,8 @@ internal object SearchTab : HomeTab {
             model.search()
         }
 
-        when (state.mode) {
-            UiMode.Content -> {
+        state.View(
+            contentView = {
                 SearchTabContent(
                     state = state.data,
                     onAction = { action ->
@@ -59,16 +58,16 @@ internal object SearchTab : HomeTab {
                         }
                     }
                 )
-            }
-
-            UiMode.Loading -> Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
-
-            is UiMode.Error -> {
+            },
+            loadingView = {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            },
+            errorView = {
                 Column(modifier = Modifier.fillMaxSize()) {
                     Spacer(1f)
                     ErrorView(
@@ -80,6 +79,6 @@ internal object SearchTab : HomeTab {
                     Spacer(1f)
                 }
             }
-        }
+        )
     }
 }
