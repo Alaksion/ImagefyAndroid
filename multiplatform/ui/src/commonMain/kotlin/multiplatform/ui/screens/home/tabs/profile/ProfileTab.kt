@@ -16,10 +16,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import io.github.alaksion.unsplashwrapper.api.models.authorization.domain.AuthorizationScope
 import io.github.alaksion.unsplashwrapper.platform.authentication.UnsplashAuth
+import kotlinx.collections.immutable.persistentSetOf
+import multiplatform.ui.app.Config
 import multiplatform.ui.design.tokens.UnsplashSpacing
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.profile.components.ProfileForm
+import multiplatform.ui.utils.rememberAppContext
+import multiplatform.ui.utils.requestBrowser
 import org.kodein.di.compose.localDI
 import org.kodein.di.instance
 
@@ -43,19 +48,18 @@ internal object ProfileTab : HomeTab {
         val model = rememberScreenModel<ProfileTabScreenModel>()
         val state by model.state.collectAsState()
         val auth by localDI().instance<UnsplashAuth>()
+        val context = rememberAppContext()
 
         LaunchedEffect(key1 = model) { model.initialize() }
 
         ProfileTabContent(
             state = state.data,
             onRequestLogin = {
-//                val url = auth.buildAuthorizeUrl(
-//                    redirectUri = Config.AUTH_REDIRECT_URI,
-//                    scopes = persistentSetOf(AuthorizationScope.Public)
-//                )
-//                val intent = Intent(Intent.ACTION_VIEW)
-//                intent.setData(Uri.parse(url))
-//                context.startActivity(intent)
+                val url = auth.buildAuthorizeUrl(
+                    redirectUri = Config.AUTH_REDIRECT_URI,
+                    scopes = persistentSetOf(AuthorizationScope.Public)
+                )
+                requestBrowser(url = url, context)
             }
         )
     }
