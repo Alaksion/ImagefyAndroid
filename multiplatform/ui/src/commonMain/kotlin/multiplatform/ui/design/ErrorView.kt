@@ -3,6 +3,7 @@ package multiplatform.ui.design
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -13,9 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import multiplatform.ui.design.tokens.UnsplashSpacing
 
@@ -38,21 +41,28 @@ internal fun ErrorView(
             painter = rememberVectorPainter(image = icon),
             contentDescription = null,
             modifier = Modifier
-                .size(64.dp)
-                .background(MaterialTheme.colorScheme.surface)
+                .size(128.dp)
                 .clip(CircleShape)
-                .padding(UnsplashSpacing.XSmall2)
+                .background(MaterialTheme.colorScheme.onSurface)
+                .padding(UnsplashSpacing.Large),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.surface)
         )
         VerticalSpacer(size = UnsplashSpacing.Large)
         Text(
+            modifier = Modifier.fillMaxWidth(),
             text = title,
-            style = MaterialTheme.typography.displayMedium,
-            fontWeight = FontWeight.SemiBold
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center
         )
+        VerticalSpacer(size = UnsplashSpacing.XSmall)
         Text(
             text = description,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(),
         )
-        Spacer(weight = 1f)
+        VerticalSpacer(size = UnsplashSpacing.Large)
+
         if (primaryAction != null && primaryActionText != null) {
             Button(
                 onClick = primaryAction

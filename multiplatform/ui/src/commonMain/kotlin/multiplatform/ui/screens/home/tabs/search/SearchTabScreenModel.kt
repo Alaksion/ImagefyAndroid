@@ -39,13 +39,10 @@ internal class SearchTabScreenModel(
         if (isInitialized) return
         setState(
             block = {
-                copy(
-                    photos = getPhotos().results
-                )
+                throw IllegalArgumentException()
             }
-        ).invokeOnCompletion {
-            isInitialized = true
-        }
+        )
+        isInitialized = true
     }
 
     fun updateQuery(query: String) = setState(
