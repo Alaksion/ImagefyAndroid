@@ -45,7 +45,7 @@ internal class SearchTabScreenModel(
                 )
             }
         )
-        isInitialized = false
+        isInitialized = true
     }
 
     fun updateQuery(query: String) = setState(
