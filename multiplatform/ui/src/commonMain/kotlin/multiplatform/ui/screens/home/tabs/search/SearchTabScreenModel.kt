@@ -35,8 +35,8 @@ internal class SearchTabScreenModel(
     private var currentPage = 0
     private var isInitialized = false
 
-    fun search() {
-        if (isInitialized) return
+    fun search(force: Boolean) {
+        if (isInitialized && force.not()) return
         setState(
             block = {
                 val fetchPhotos = getPhotos()
