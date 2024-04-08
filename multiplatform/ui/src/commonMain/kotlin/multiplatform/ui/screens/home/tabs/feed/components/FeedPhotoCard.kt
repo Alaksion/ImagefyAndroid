@@ -35,6 +35,7 @@ import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import multiplatform.ui.design.tokens.UnsplashSpacing
 import multiplatform.ui.utils.rememberDeviceDimensions
+import multiplatform.ui.utils.rememberImageProportionalHeight
 
 @Composable
 internal fun FeedPhotoCard(
@@ -43,11 +44,11 @@ internal fun FeedPhotoCard(
     showSpacer: Boolean,
 ) {
     val dimensions = rememberDeviceDimensions()
-    val cardHeight = remember(data) {
-        val photoWidth = data.width.dp
-        val widthRatio = dimensions.width / photoWidth
-        data.height.dp * widthRatio
-    }
+    val cardHeight = rememberImageProportionalHeight(
+        containerWidth = dimensions.width,
+        originalImageHeight = data.height.dp,
+        originalImageWidth = data.width.dp
+    )
 
     Column(modifier = modifier) {
         Header(
