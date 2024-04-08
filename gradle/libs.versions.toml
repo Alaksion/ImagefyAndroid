@@ -17,6 +17,7 @@ androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 appcompat = "1.6.1"
 material = "1.11.0"
+unsplash-wrapper = "0.0.2"
 
 [libraries]
 # Compose
@@ -46,6 +47,9 @@ compose-gradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin",
 
 # Kamel
 kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
+
+# Libs
+unsplash-wrapper = { module = "io.github.alaksion:unsplash-wrapper", version.ref = "unsplash-wrapper" }
 
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

@@ -10,7 +10,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("io.github.alaksion:unsplash-wrapper:0.0.1")
+                implementation(libs.unsplash.wrapper)
 
                 // Project
                 implementation(projects.multiplatform.session)

@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -29,11 +31,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
-import io.kamel.core.isLoading
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import multiplatform.ui.design.modifiers.shimmer
 import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.utils.rememberDeviceDimensions
 
 @Composable
 internal fun FeedPhotoCard(
@@ -41,6 +42,13 @@ internal fun FeedPhotoCard(
     modifier: Modifier = Modifier,
     showSpacer: Boolean,
 ) {
+    val dimensions = rememberDeviceDimensions()
+    val cardHeight = remember(data) {
+        val photoWidth = data.width.dp
+        val widthRatio = dimensions.width / photoWidth
+        data.height.dp * widthRatio
+    }
+
     Column(modifier = modifier) {
         Header(
             name = data.user.name,
@@ -51,11 +59,12 @@ internal fun FeedPhotoCard(
                 .padding(
                     horizontal = UnsplashSpacing.Small,
                     vertical = UnsplashSpacing.XSmall
-                )
+                ),
+            loadingColor = data.color.composeColor
         )
         Photo(
             url = data.urls.regular,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(cardHeight),
         )
         Footer(
             description = data.description,
@@ -72,6 +81,7 @@ private fun Header(
     name: String,
     username: String,
     profileImageUrl: String,
+    loadingColor: Color,
     modifier: Modifier = Modifier
 ) {
     val painter = asyncPainterResource(data = profileImageUrl)
@@ -85,11 +95,12 @@ private fun Header(
             modifier = Modifier
                 .size(32.dp)
                 .clip(CircleShape)
-                .shadow(1.dp)
-                .shimmer(painter.isLoading),
+                .shadow(1.dp),
             contentDescription = null,
             resource = painter,
-            onLoading = {},
+            onLoading = {
+                Box(modifier = Modifier.background(loadingColor).fillMaxSize())
+            },
             onFailure = {
                 Box(modifier = Modifier.background(Color.Red))
             },
