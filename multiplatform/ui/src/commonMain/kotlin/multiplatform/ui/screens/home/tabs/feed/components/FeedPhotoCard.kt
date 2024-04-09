@@ -66,6 +66,7 @@ internal fun FeedPhotoCard(
         Photo(
             url = data.urls.regular,
             modifier = Modifier.fillMaxWidth().height(cardHeight),
+            loadingBackground = data.color.composeColor
         )
         Footer(
             description = data.description,
@@ -123,13 +124,18 @@ private fun Header(
 @Composable
 private fun Photo(
     modifier: Modifier = Modifier,
+    loadingBackground: Color,
     url: String,
 ) {
+    val loader = asyncPainterResource(data = url)
+
     KamelImage(
         modifier = modifier,
         contentDescription = null,
-        resource = asyncPainterResource(data = url),
-        onLoading = {},
+        resource = loader,
+        onLoading = {
+            Box(Modifier.fillMaxSize().background(loadingBackground))
+        },
         onFailure = { Box(modifier = Modifier.background(Color.Red)) },
     )
 }

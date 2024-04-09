@@ -69,7 +69,7 @@ android {
 
 dependencies {
 
-    implementation("io.github.alaksion:unsplash-wrapper:0.0.1")
+    implementation(libs.unsplash.wrapper)
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
