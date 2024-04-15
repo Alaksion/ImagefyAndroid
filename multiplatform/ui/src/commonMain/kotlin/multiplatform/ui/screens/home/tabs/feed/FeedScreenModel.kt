@@ -11,11 +11,7 @@ import multiplatform.stateScreenmodel.StateScreenModel
 
 private const val PAGE_LIMIT = 10
 
-internal data class FeedState(
-    val photos: ImmutableList<ListPhoto> = persistentListOf(),
-    val orderBy: ListPhotoOrderBy = ListPhotoOrderBy.Latest,
-    val showLoadingIndicator: Boolean = false,
-)
+
 
 internal class FeedScreenModel(
     dispatcher: CoroutineDispatcher,
@@ -63,6 +59,31 @@ internal class FeedScreenModel(
                 }
             },
             showLoading = false
+        )
+    }
+
+    fun updateOrderBy(
+        value: ListPhotoOrderBy
+    ) {
+        updateState(
+            block = {
+                currentPage = 1
+                update { oldState ->
+                    oldState.copy(
+                        orderBy = value
+                    )
+                }
+                val reloadedFeed = photosRepository.getPhotos(
+                    page = currentPage,
+                    resultsPerPage = PAGE_LIMIT,
+                    orderBy = currentData.orderBy
+                )
+                update { oldState ->
+                    oldState.copy(
+                        photos = reloadedFeed
+                    )
+                }
+            },
         )
     }
 

@@ -1,23 +1,42 @@
 package multiplatform.ui.screens.home.tabs.feed
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhotoOrderBy
+import kotlinx.coroutines.launch
+import multiplatform.ui.design.HorizontalSpacer
+import multiplatform.ui.design.tokens.UnsplashSpacing
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.feed.components.FeedPhotoCard
+import multiplatform.ui.screens.home.tabs.feed.components.OrderByModal
 
 internal object FeedTab : HomeTab {
 
@@ -42,21 +61,69 @@ internal object FeedTab : HomeTab {
 
         FeedTabContent(
             state = state.data,
+            updateOrderBy = model::updateOrderBy
         )
     }
 
 }
 
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun FeedTabContent(
     state: FeedState,
+    updateOrderBy: (ListPhotoOrderBy) -> Unit
 ) {
+    val sheetState = rememberModalBottomSheetState()
+    val scope = rememberCoroutineScope()
+
     Column {
+        if (sheetState.isVisible) {
+            OrderByModal(
+                modifier = Modifier.fillMaxWidth(),
+                currentOrderBy = state.orderBy,
+                onChange = updateOrderBy,
+                onDismiss = {
+                    scope.launch { sheetState.hide() }
+                },
+                state = sheetState
+            )
+        }
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .weight(1f),
         ) {
+            stickyHeader(key = 1) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(UnsplashSpacing.Medium),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = state.orderBy.icon,
+                        contentDescription = null,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    HorizontalSpacer(UnsplashSpacing.Medium)
+                    Text(
+                        text = state.orderBy.text,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    HorizontalSpacer(UnsplashSpacing.XSmall)
+                    IconButton(
+                        onClick = { scope.launch { sheetState.expand() } },
+                        modifier = Modifier.size(12.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.ExpandMore,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+
+                }
+            }
             itemsIndexed(
                 items = state.photos,
                 key = { _, item -> item.id }
