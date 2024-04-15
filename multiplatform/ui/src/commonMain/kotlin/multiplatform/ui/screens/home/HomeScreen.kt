@@ -1,6 +1,7 @@
 package multiplatform.ui.screens.home
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
@@ -34,6 +35,7 @@ internal class HomeScreen : Screen {
             FeedTab,
         ) { navigator ->
             Scaffold(
+                modifier = Modifier.navigationBarsPadding(),
                 content = { scaffoldPadding ->
                     Surface(modifier = Modifier.padding(scaffoldPadding)) {
                         CurrentTab()
