@@ -3,6 +3,7 @@ package multiplatform.ui.screens.home.tabs.feed.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
@@ -18,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhotoOrderBy
 import multiplatform.ui.design.BaseCard
 import multiplatform.ui.design.VerticalSpacer
@@ -39,11 +41,14 @@ internal fun OrderByModal(
     }
 
     ModalBottomSheet(
+        modifier = modifier,
         sheetState = state,
         content = {
             Column(
-                modifier = modifier
-                    .padding(horizontal = UnsplashSpacing.Medium, vertical = UnsplashSpacing.Small)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = UnsplashSpacing.Medium)
+                    .navigationBarsPadding()
             ) {
                 Text(
                     text = "Order photos by"
@@ -70,9 +75,10 @@ internal fun OrderByModal(
                 ) {
                     Text("Select")
                 }
+                VerticalSpacer(50.dp)
             }
         },
-        onDismissRequest = onDismiss
+        onDismissRequest = onDismiss,
     )
 }
 

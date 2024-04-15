@@ -1,6 +1,6 @@
 package multiplatform.ui.screens.home.tabs.feed
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +15,6 @@ import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -67,7 +66,7 @@ internal object FeedTab : HomeTab {
 
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun FeedTabContent(
     state: FeedState,
@@ -76,12 +75,19 @@ private fun FeedTabContent(
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
 
-    Column {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
         if (sheetState.isVisible) {
             OrderByModal(
                 modifier = Modifier.fillMaxWidth(),
                 currentOrderBy = state.orderBy,
-                onChange = updateOrderBy,
+                onChange = {
+                    scope.launch {
+                        updateOrderBy(it)
+                        sheetState.hide()
+                    }
+                },
                 onDismiss = {
                     scope.launch { sheetState.hide() }
                 },
@@ -93,11 +99,14 @@ private fun FeedTabContent(
                 .fillMaxSize()
                 .weight(1f),
         ) {
-            stickyHeader(key = 1) {
+            item(key = 1) {
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(UnsplashSpacing.Medium),
+                        .padding(
+                            horizontal = UnsplashSpacing.Medium,
+                            vertical = UnsplashSpacing.Small
+                        )
+                        .clickable { scope.launch { sheetState.show() } },
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
@@ -105,23 +114,17 @@ private fun FeedTabContent(
                         contentDescription = null,
                         modifier = Modifier.size(16.dp)
                     )
-                    HorizontalSpacer(UnsplashSpacing.Medium)
+                    HorizontalSpacer(UnsplashSpacing.Small)
                     Text(
                         text = state.orderBy.text,
                         style = MaterialTheme.typography.bodySmall
                     )
                     HorizontalSpacer(UnsplashSpacing.XSmall)
-                    IconButton(
-                        onClick = { scope.launch { sheetState.expand() } },
-                        modifier = Modifier.size(12.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.ExpandMore,
-                            contentDescription = null,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
-
+                    Icon(
+                        imageVector = Icons.Outlined.ExpandMore,
+                        contentDescription = null,
+                        modifier = Modifier.size(16.dp)
+                    )
                 }
             }
             itemsIndexed(
