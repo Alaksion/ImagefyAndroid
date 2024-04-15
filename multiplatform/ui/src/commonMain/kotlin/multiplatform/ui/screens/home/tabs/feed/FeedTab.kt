@@ -1,6 +1,7 @@
 package multiplatform.ui.screens.home.tabs.feed
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,12 +10,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.outlined.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -74,6 +79,7 @@ private fun FeedTabContent(
 ) {
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -94,50 +100,74 @@ private fun FeedTabContent(
                 state = sheetState
             )
         }
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .weight(1f),
+        Box(
+            modifier = Modifier.weight(1f).fillMaxWidth()
         ) {
-            item(key = 1) {
-                Row(
-                    modifier = Modifier
-                        .padding(
-                            horizontal = UnsplashSpacing.Medium,
-                            vertical = UnsplashSpacing.Small
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                state = listState
+            ) {
+                item(key = 1) {
+                    Row(
+                        modifier = Modifier
+                            .padding(
+                                horizontal = UnsplashSpacing.Medium,
+                                vertical = UnsplashSpacing.Small
+                            )
+                            .clickable { scope.launch { sheetState.show() } },
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            imageVector = state.orderBy.icon,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp)
                         )
-                        .clickable { scope.launch { sheetState.show() } },
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Icon(
-                        imageVector = state.orderBy.icon,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    HorizontalSpacer(UnsplashSpacing.Small)
-                    Text(
-                        text = state.orderBy.text,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    HorizontalSpacer(UnsplashSpacing.XSmall)
-                    Icon(
-                        imageVector = Icons.Outlined.ExpandMore,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp)
+                        HorizontalSpacer(UnsplashSpacing.Small)
+                        Text(
+                            text = state.orderBy.text,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                        HorizontalSpacer(UnsplashSpacing.XSmall)
+                        Icon(
+                            imageVector = Icons.Outlined.ExpandMore,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                }
+                itemsIndexed(
+                    items = state.photos,
+                    key = { _, item -> item.id }
+                ) { index, photo ->
+                    FeedPhotoCard(
+                        data = photo,
+                        modifier = Modifier.fillMaxWidth(),
+                        showSpacer = index != state.photos.lastIndex
                     )
                 }
             }
-            itemsIndexed(
-                items = state.photos,
-                key = { _, item -> item.id }
-            ) { index, photo ->
-                FeedPhotoCard(
-                    data = photo,
-                    modifier = Modifier.fillMaxWidth(),
-                    showSpacer = index != state.photos.lastIndex
-                )
+            if (listState.firstVisibleItemIndex != 0) {
+                IconButton(
+                    onClick = {
+                        scope.launch {
+                            listState.animateScrollToItem(index = 0)
+                        }
+                    },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd),
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f),
+                        contentColor = MaterialTheme.colorScheme.background.copy(alpha = 0.8f)
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.ExpandLess,
+                        contentDescription = null
+                    )
+                }
             }
         }
+
     }
 
 }
