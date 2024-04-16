@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
@@ -19,6 +20,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,7 +35,6 @@ import androidx.compose.ui.unit.dp
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.tokens.UnsplashSpacing
 import multiplatform.ui.utils.rememberDeviceDimensions
 import multiplatform.ui.utils.rememberImageProportionalHeight
@@ -46,6 +50,7 @@ internal fun FeedPhotoCard(
         originalImageHeight = data.height.dp,
         originalImageWidth = data.width.dp
     )
+    var localIsLiked by remember(data) { mutableStateOf(data.likedByUser) }
 
     Column(modifier = modifier) {
         Header(
@@ -67,7 +72,11 @@ internal fun FeedPhotoCard(
         )
         Footer(
             description = data.description,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            isLiked = localIsLiked,
+            onLike = {
+                localIsLiked = localIsLiked.not()
+            }
         )
     }
 }
@@ -138,15 +147,31 @@ private fun Photo(
 private fun Footer(
     modifier: Modifier = Modifier,
     description: String?,
+    isLiked: Boolean,
+    onLike: () -> Unit,
 ) {
+    val colors = MaterialTheme.colorScheme
+
+    val likeIcon = remember(isLiked) {
+        if (isLiked) Icons.Filled.Favorite
+        else Icons.Outlined.FavoriteBorder
+    }
+
+    val likeIconTint = remember(isLiked, colors) {
+        if (isLiked) Color.Red
+        else colors.onSurface
+    }
+
     Column(modifier = modifier) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            IconButton(onClick = { }) {
-                Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = null)
+            IconButton(
+                onClick = onLike
+            ) {
+                Icon(imageVector = likeIcon, contentDescription = null, tint = likeIconTint)
             }
             IconButton(onClick = { }) {
                 Icon(imageVector = Icons.Outlined.BookmarkAdd, contentDescription = null)
