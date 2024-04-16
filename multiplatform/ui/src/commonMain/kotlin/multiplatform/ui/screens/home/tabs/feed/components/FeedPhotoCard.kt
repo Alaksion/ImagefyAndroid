@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,13 +14,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.tokens.UnsplashSpacing
 import multiplatform.ui.utils.rememberDeviceDimensions
 import multiplatform.ui.utils.rememberImageProportionalHeight
@@ -41,7 +39,6 @@ import multiplatform.ui.utils.rememberImageProportionalHeight
 internal fun FeedPhotoCard(
     data: ListPhoto,
     modifier: Modifier = Modifier,
-    showSpacer: Boolean,
 ) {
     val dimensions = rememberDeviceDimensions()
     val cardHeight = rememberImageProportionalHeight(
@@ -72,9 +69,6 @@ internal fun FeedPhotoCard(
             description = data.description,
             modifier = Modifier.fillMaxWidth()
         )
-        if (showSpacer) {
-            Divider(modifier = Modifier.padding(vertical = UnsplashSpacing.XSmall2))
-        }
     }
 }
 
@@ -145,17 +139,9 @@ private fun Footer(
     modifier: Modifier = Modifier,
     description: String?,
 ) {
-    val actionPadding = remember(description) {
-        if (description != null) {
-            PaddingValues(vertical = UnsplashSpacing.XSmall2)
-        } else PaddingValues(top = UnsplashSpacing.XSmall2)
-    }
-
     Column(modifier = modifier) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(actionPadding),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -172,7 +158,7 @@ private fun Footer(
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = UnsplashSpacing.Small)
+                    .padding(horizontal = UnsplashSpacing.Medium)
             )
         }
     }

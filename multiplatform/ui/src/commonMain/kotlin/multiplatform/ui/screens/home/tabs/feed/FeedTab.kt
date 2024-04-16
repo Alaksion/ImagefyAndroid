@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,6 +40,7 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhotoOrderBy
 import kotlinx.coroutines.launch
 import multiplatform.ui.design.HorizontalSpacer
+import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.tokens.UnsplashSpacing
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.feed.components.FeedPhotoCard
@@ -154,8 +156,11 @@ private fun FeedTabContent(
                     FeedPhotoCard(
                         data = photo,
                         modifier = Modifier.fillMaxWidth(),
-                        showSpacer = index != state.photos.lastIndex
                     )
+                    if (index != state.photos.lastIndex) {
+                        VerticalSpacer(UnsplashSpacing.XSmall)
+                        Divider()
+                    }
                 }
             }
             if (listState.firstVisibleItemIndex != 0) {
