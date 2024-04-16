@@ -2,7 +2,10 @@ package multiplatform.ui.screens.home.tabs.feed.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
@@ -37,6 +40,7 @@ internal fun OrderByModal(
     var localSelection by remember(currentOrderBy) {
         mutableStateOf(currentOrderBy)
     }
+    val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
 
     ModalBottomSheet(
         modifier = modifier,
@@ -46,6 +50,7 @@ internal fun OrderByModal(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = UnsplashSpacing.Medium)
+                    .padding(bottom = bottomPadding)
             ) {
                 Text(
                     text = "Order photos by"
