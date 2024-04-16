@@ -1,6 +1,8 @@
 package multiplatform.ui.screens.home.tabs.feed
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -80,6 +82,7 @@ private fun FeedTabContent(
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
     val listState = rememberLazyListState()
+    val interactionSource = remember { MutableInteractionSource() }
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -110,28 +113,37 @@ private fun FeedTabContent(
                 item(key = 1) {
                     Row(
                         modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
                             .padding(
                                 horizontal = UnsplashSpacing.Medium,
                                 vertical = UnsplashSpacing.Small
                             )
-                            .clickable { scope.launch { sheetState.show() } },
+                            .clickable(
+                                onClick = { scope.launch { sheetState.show() } },
+                                interactionSource = interactionSource,
+                                indication = null
+                            ),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
                             imageVector = state.orderBy.icon,
                             contentDescription = null,
-                            modifier = Modifier.size(16.dp)
+                            modifier = Modifier.size(16.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         HorizontalSpacer(UnsplashSpacing.Small)
                         Text(
                             text = state.orderBy.text,
-                            style = MaterialTheme.typography.bodySmall
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         HorizontalSpacer(UnsplashSpacing.XSmall)
                         Icon(
                             imageVector = Icons.Outlined.ExpandMore,
                             contentDescription = null,
-                            modifier = Modifier.size(16.dp)
+                            modifier = Modifier.size(16.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
