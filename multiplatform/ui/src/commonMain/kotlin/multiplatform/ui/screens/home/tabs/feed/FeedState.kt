@@ -3,7 +3,6 @@ package multiplatform.ui.screens.home.tabs.feed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CalendarToday
 import androidx.compose.material.icons.outlined.CalendarViewWeek
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.ui.graphics.vector.ImageVector
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
@@ -14,7 +13,7 @@ import kotlinx.collections.immutable.persistentListOf
 internal data class FeedState(
     val photos: ImmutableList<ListPhoto> = persistentListOf(),
     val orderBy: ListPhotoOrderBy = ListPhotoOrderBy.Latest,
-    val showLoadingIndicator: Boolean = false,
+    val isNextPageLoading: Boolean = false,
 )
 
 internal val ListPhotoOrderBy.icon: ImageVector

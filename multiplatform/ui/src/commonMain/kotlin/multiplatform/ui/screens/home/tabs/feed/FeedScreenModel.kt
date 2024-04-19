@@ -1,16 +1,12 @@
 package multiplatform.ui.screens.home.tabs.feed
 
-import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhotoOrderBy
 import io.github.alaksion.unsplashwrapper.api.repositories.UnsplashPhotosRepository
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.CoroutineDispatcher
 import multiplatform.stateScreenmodel.StateScreenModel
 
 private const val PAGE_LIMIT = 10
-
 
 
 internal class FeedScreenModel(
@@ -41,11 +37,11 @@ internal class FeedScreenModel(
     }
 
     fun loadNextPage() {
-        if (isInitialized.not() || currentData.showLoadingIndicator) return
+        if (isInitialized || currentData.isNextPageLoading.not()) return
         updateState(
             block = {
                 currentPage++
-                update { it.copy(showLoadingIndicator = true) }
+                update { it.copy(isNextPageLoading = true) }
                 val newPhotos = photosRepository.getPhotos(
                     page = 0,
                     resultsPerPage = PAGE_LIMIT,
@@ -53,7 +49,7 @@ internal class FeedScreenModel(
                 )
                 update { oldState ->
                     oldState.copy(
-                        showLoadingIndicator = false,
+                        isNextPageLoading = false,
                         photos = (currentData.photos + newPhotos).toPersistentList()
                     )
                 }

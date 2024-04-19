@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -28,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -41,7 +43,9 @@ import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
 import kotlinx.coroutines.launch
 import multiplatform.ui.design.HorizontalSpacer
 import multiplatform.ui.design.VerticalSpacer
+import multiplatform.ui.design.autoscroll.AutoScroll
 import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.logger.log
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.feed.components.FeedPhotoCard
 import multiplatform.ui.screens.home.tabs.feed.components.OrderByModal
@@ -69,7 +73,8 @@ internal object FeedTab : HomeTab {
 
         FeedTabContent(
             state = state.data,
-            updateOrderBy = model::updateOrderBy
+            updateOrderBy = model::updateOrderBy,
+            onRequestNextPage = model::loadNextPage
         )
     }
 
@@ -79,12 +84,17 @@ internal object FeedTab : HomeTab {
 @Composable
 private fun FeedTabContent(
     state: FeedState,
-    updateOrderBy: (ListPhotoOrderBy) -> Unit
+    updateOrderBy: (ListPhotoOrderBy) -> Unit,
+    onRequestNextPage: () -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
     val listState = rememberLazyListState()
     val interactionSource = remember { MutableInteractionSource() }
+
+    listState.AutoScroll {
+        onRequestNextPage()
+    }
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -160,6 +170,11 @@ private fun FeedTabContent(
                     if (index != state.photos.lastIndex) {
                         VerticalSpacer(UnsplashSpacing.XSmall)
                         Divider()
+                    }
+                }
+                if (state.isNextPageLoading) {
+                    item(key = 2) {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                     }
                 }
             }
