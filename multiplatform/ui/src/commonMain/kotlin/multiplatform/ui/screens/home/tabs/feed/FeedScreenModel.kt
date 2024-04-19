@@ -37,7 +37,7 @@ internal class FeedScreenModel(
     }
 
     fun loadNextPage() {
-        if (isInitialized || currentData.isNextPageLoading.not()) return
+        if (isInitialized.not() || currentData.isNextPageLoading) return
         updateState(
             block = {
                 currentPage++
