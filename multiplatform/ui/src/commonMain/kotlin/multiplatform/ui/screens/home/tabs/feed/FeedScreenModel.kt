@@ -90,19 +90,21 @@ internal class FeedScreenModel(
         force: Boolean
     ) {
         if (isDataLoaded && force.not()) return
-        setState(
+        updateState(
             block = {
                 val photos = photosRepository.getPhotos(
                     page = currentPage,
                     resultsPerPage = PAGE_LIMIT,
-                    orderBy = this.orderBy
+                    orderBy = currentData.orderBy
                 )
-                this.copy(
-                    photos = (this.photos + photos).toPersistentList()
-                )
+                update {
+                    it.copy(
+                        photos = (it.photos + photos).toPersistentList()
+                    )
+                }
+                isDataLoaded = true
             },
         )
-        isDataLoaded = true
     }
 
     private fun updateUserLoggedState() {
@@ -110,7 +112,8 @@ internal class FeedScreenModel(
             block = {
                 this.copy(isUserLogged = sessionHandler.currentUser != null)
             },
-            showLoading = false
+            showLoading = false,
+            updateModeSuccess = false,
         )
     }
 

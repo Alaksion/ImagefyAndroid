@@ -11,6 +11,7 @@ import io.github.alaksion.unsplashwrapper.sdk.UnsplashWrapperSdk
 import kotlinx.coroutines.flow.collectLatest
 import multiplatform.ui.design.theme.ImagefyTheme
 import multiplatform.ui.di.appModule
+import multiplatform.ui.listeners.AppHttpListener
 import multiplatform.ui.screens.loginhandler.LoginHandlerScreen
 import org.kodein.di.compose.rememberInstance
 import org.kodein.di.compose.withDI
@@ -36,6 +37,7 @@ private fun AppEffects(
     plugin: ImagefyAppPlugin,
 ) {
     val sdk by rememberInstance<UnsplashWrapperSdk>()
+    val httpListener by rememberInstance<AppHttpListener>()
     val navigator = LocalNavigator.current
 
     LaunchedEffect(plugin.loginListener) {
@@ -53,7 +55,8 @@ private fun AppEffects(
     LaunchedEffect(key1 = plugin) {
         sdk.initialize(
             apiKey = plugin.keys.apiKey,
-            privateKey = plugin.keys.private
+            privateKey = plugin.keys.private,
+            httpListener = httpListener
         )
     }
 }

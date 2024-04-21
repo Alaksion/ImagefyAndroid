@@ -35,6 +35,7 @@ abstract class StateScreenModel<T>(
     fun setState(
         block: suspend T.() -> T,
         showLoading: Boolean = true,
+        updateModeSuccess: Boolean = true,
     ): Job = updateState(
         block = {
             val result = block(_state.value.data)
@@ -46,6 +47,7 @@ abstract class StateScreenModel<T>(
     fun updateState(
         block: suspend StateUpdater<T>.() -> Unit,
         showLoading: Boolean = true,
+        updateModeSuccess: Boolean = true,
     ): Job = screenModelScope.launch(dispatcher) {
         if (showLoading)
             _state.update { old -> old.copy(mode = UiMode.Loading) }
@@ -53,7 +55,9 @@ abstract class StateScreenModel<T>(
             block(stateUpdater)
         }.fold(
             onSuccess = {
-                _state.update { old -> old.copy(mode = UiMode.Content) }
+                if (updateModeSuccess) {
+                    _state.update { old -> old.copy(mode = UiMode.Content) }
+                }
             },
             onFailure = { error ->
                 logger.log(error.message.orEmpty(), type = LogType.Error)
