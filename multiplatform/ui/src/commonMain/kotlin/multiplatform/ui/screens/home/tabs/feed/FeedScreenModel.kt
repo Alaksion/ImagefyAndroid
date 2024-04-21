@@ -21,13 +21,13 @@ internal class FeedScreenModel(
     private var isDataLoaded = false
     private var currentPage = 1
 
-    fun resumeState() {
+    fun resumeState(force: Boolean) {
         updateUserLoggedState()
-        loadData()
+        loadData(force)
     }
 
     fun loadNextPage() {
-        if (isDataLoaded.not() || currentData.isNextPageLoading) return
+        if ((isDataLoaded.not() || currentData.isNextPageLoading)) return
         updateState(
             block = {
                 currentPage++
@@ -86,8 +86,10 @@ internal class FeedScreenModel(
         )
     }
 
-    private fun loadData() {
-        if (isDataLoaded) return
+    private fun loadData(
+        force: Boolean
+    ) {
+        if (isDataLoaded && force.not()) return
         setState(
             block = {
                 val photos = photosRepository.getPhotos(

@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Home
@@ -41,7 +42,10 @@ import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhotoOrderBy
 import kotlinx.coroutines.launch
+import multiplatform.stateScreenmodel.View
+import multiplatform.ui.design.ErrorView
 import multiplatform.ui.design.HorizontalSpacer
+import multiplatform.ui.design.LoadingView
 import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.autoscroll.AutoScroll
 import multiplatform.ui.design.tokens.UnsplashSpacing
@@ -68,13 +72,30 @@ internal object FeedTab : HomeTab {
     override fun Content() {
         val model: FeedScreenModel = rememberScreenModel()
         val state by model.state.collectAsState()
-        LaunchedEffect(key1 = model) { model.resumeState() }
+        LaunchedEffect(key1 = model) { model.resumeState(force = false) }
 
-        FeedTabContent(
-            state = state.data,
-            updateOrderBy = model::updateOrderBy,
-            onRequestNextPage = model::loadNextPage,
-            onFavorite = model::favoritePost
+        state.View(
+            contentView = {
+                FeedTabContent(
+                    state = state.data,
+                    updateOrderBy = model::updateOrderBy,
+                    onRequestNextPage = model::loadNextPage,
+                    onFavorite = model::favoritePost
+                )
+            },
+            loadingView = {
+                LoadingView(Modifier.fillMaxSize())
+            },
+            errorView = {
+                ErrorView(
+                    modifier = Modifier.fillMaxSize(),
+                    description = "Check your internet connection",
+                    icon = Icons.Outlined.Close,
+                    title = "Something went wrong",
+                    primaryAction = { model.resumeState(force = true) },
+                    primaryActionText = "Retry"
+                )
+            }
         )
     }
 
