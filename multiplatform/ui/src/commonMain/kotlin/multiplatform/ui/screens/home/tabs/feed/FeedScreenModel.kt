@@ -43,7 +43,7 @@ internal class FeedScreenModel(
                 currentPage++
                 update { it.copy(isNextPageLoading = true) }
                 val newPhotos = photosRepository.getPhotos(
-                    page = 0,
+                    page = currentPage,
                     resultsPerPage = PAGE_LIMIT,
                     orderBy = currentData.orderBy
                 )

@@ -29,8 +29,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -45,7 +45,6 @@ import multiplatform.ui.design.HorizontalSpacer
 import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.autoscroll.AutoScroll
 import multiplatform.ui.design.tokens.UnsplashSpacing
-import multiplatform.ui.logger.log
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.feed.components.FeedPhotoCard
 import multiplatform.ui.screens.home.tabs.feed.components.OrderByModal
@@ -92,7 +91,16 @@ private fun FeedTabContent(
     val listState = rememberLazyListState()
     val interactionSource = remember { MutableInteractionSource() }
 
-    listState.AutoScroll {
+    val showTopScrollButton = remember {
+        derivedStateOf {
+            listState.firstVisibleItemIndex != 0
+        }
+    }
+
+    listState.AutoScroll(
+        enabled = state.isNextPageLoading.not(),
+        offset = 1
+    ) {
         onRequestNextPage()
     }
 
@@ -178,7 +186,7 @@ private fun FeedTabContent(
                     }
                 }
             }
-            if (listState.firstVisibleItemIndex != 0) {
+            if (showTopScrollButton.value) {
                 IconButton(
                     onClick = {
                         scope.launch {

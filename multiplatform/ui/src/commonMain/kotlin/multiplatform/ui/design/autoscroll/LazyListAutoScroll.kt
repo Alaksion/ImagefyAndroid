@@ -3,8 +3,6 @@ package multiplatform.ui.design.autoscroll
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 
 @Composable
 internal fun LazyListState.AutoScroll(
@@ -12,16 +10,14 @@ internal fun LazyListState.AutoScroll(
     offset: Int = 0,
     onNext: () -> Unit,
 ) {
-    val shouldReload = remember {
-        derivedStateOf {
-            val lastVisibleItem = layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
 
-            lastVisibleItem != 0
-                    && lastVisibleItem == (layoutInfo.totalItemsCount - 1) - offset
-                    && enabled
+    // Should be done with derivedState but it's not working
+    LaunchedEffect(layoutInfo) {
+        val lastItem = layoutInfo.visibleItemsInfo.lastOrNull()
+        lastItem?.let {
+            if (it.index >= layoutInfo.totalItemsCount - offset && enabled) {
+                onNext()
+            }
         }
-    }
-    LaunchedEffect(shouldReload) {
-        if (shouldReload.value) onNext()
     }
 }
