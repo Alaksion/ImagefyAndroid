@@ -41,7 +41,8 @@ abstract class StateScreenModel<T>(
             val result = block(_state.value.data)
             update { result }
         },
-        showLoading = showLoading
+        showLoading = showLoading,
+        updateModeSuccess = updateModeSuccess
     )
 
     fun updateState(
@@ -69,11 +70,13 @@ abstract class StateScreenModel<T>(
     fun runCatching(
         block: suspend () -> Unit,
         showLoading: Boolean = true,
+        updateModeSuccess: Boolean = true,
     ): Job = updateState(
         block = {
             block()
         },
-        showLoading = showLoading
+        showLoading = showLoading,
+        updateModeSuccess = updateModeSuccess
     )
 
 }
