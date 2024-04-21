@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,6 +44,7 @@ import multiplatform.ui.utils.rememberImageProportionalHeight
 internal fun FeedPhotoCard(
     data: ListPhoto,
     modifier: Modifier = Modifier,
+    onFavorite: (Boolean, String) -> Unit,
 ) {
     val dimensions = rememberDeviceDimensions()
     val cardHeight = rememberImageProportionalHeight(
@@ -50,7 +52,7 @@ internal fun FeedPhotoCard(
         originalImageHeight = data.height.dp,
         originalImageWidth = data.width.dp
     )
-    var localIsLiked by remember(data) { mutableStateOf(data.likedByUser) }
+    var localIsLiked by rememberSaveable(data) { mutableStateOf(data.likedByUser) }
 
     Column(modifier = modifier) {
         Header(
@@ -76,6 +78,7 @@ internal fun FeedPhotoCard(
             isLiked = localIsLiked,
             onLike = {
                 localIsLiked = localIsLiked.not()
+                onFavorite(localIsLiked, data.id)
             }
         )
     }

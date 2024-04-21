@@ -83,4 +83,17 @@ internal class FeedScreenModel(
         )
     }
 
+    fun favoritePost(
+        isFavorite: Boolean,
+        photoId: String,
+    ) {
+        runCatching(
+            showLoading = false,
+            block = {
+                if (isFavorite) photosRepository.unlikePhoto(photoId)
+                else photosRepository.likePhoto(photoId)
+            }
+        )
+    }
+
 }

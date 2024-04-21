@@ -73,7 +73,8 @@ internal object FeedTab : HomeTab {
         FeedTabContent(
             state = state.data,
             updateOrderBy = model::updateOrderBy,
-            onRequestNextPage = model::loadNextPage
+            onRequestNextPage = model::loadNextPage,
+            onFavorite = model::favoritePost
         )
     }
 
@@ -85,6 +86,7 @@ private fun FeedTabContent(
     state: FeedState,
     updateOrderBy: (ListPhotoOrderBy) -> Unit,
     onRequestNextPage: () -> Unit,
+    onFavorite: (Boolean, String) -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
@@ -174,6 +176,7 @@ private fun FeedTabContent(
                     FeedPhotoCard(
                         data = photo,
                         modifier = Modifier.fillMaxWidth(),
+                        onFavorite = onFavorite
                     )
                     if (index != state.photos.lastIndex) {
                         VerticalSpacer(UnsplashSpacing.XSmall)
