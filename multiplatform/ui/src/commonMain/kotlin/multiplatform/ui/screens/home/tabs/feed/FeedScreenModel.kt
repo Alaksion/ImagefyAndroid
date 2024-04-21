@@ -5,6 +5,7 @@ import io.github.alaksion.unsplashwrapper.api.repositories.UnsplashPhotosReposit
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.CoroutineDispatcher
 import multiplatform.stateScreenmodel.StateScreenModel
+import mutiplatform.session.SessionHandler
 
 private const val PAGE_LIMIT = 10
 
@@ -12,32 +13,21 @@ private const val PAGE_LIMIT = 10
 internal class FeedScreenModel(
     dispatcher: CoroutineDispatcher,
     private val photosRepository: UnsplashPhotosRepository,
+    private val sessionHandler: SessionHandler,
 ) : StateScreenModel<FeedState>(
     dispatcher = dispatcher,
     initialState = FeedState()
 ) {
-    private var isInitialized = false
+    private var isDataLoaded = false
     private var currentPage = 1
 
-    fun initialize() {
-        if (isInitialized) return
-        setState(
-            block = {
-                val photos = photosRepository.getPhotos(
-                    page = currentPage,
-                    resultsPerPage = PAGE_LIMIT,
-                    orderBy = this.orderBy
-                )
-                this.copy(
-                    photos = (this.photos + photos).toPersistentList()
-                )
-            },
-        )
-        isInitialized = true
+    fun resumeState() {
+        updateUserLoggedState()
+        loadData()
     }
 
     fun loadNextPage() {
-        if (isInitialized.not() || currentData.isNextPageLoading) return
+        if (isDataLoaded.not() || currentData.isNextPageLoading) return
         updateState(
             block = {
                 currentPage++
@@ -93,6 +83,32 @@ internal class FeedScreenModel(
                 if (isFavorite) photosRepository.unlikePhoto(photoId)
                 else photosRepository.likePhoto(photoId)
             }
+        )
+    }
+
+    private fun loadData() {
+        if (isDataLoaded) return
+        setState(
+            block = {
+                val photos = photosRepository.getPhotos(
+                    page = currentPage,
+                    resultsPerPage = PAGE_LIMIT,
+                    orderBy = this.orderBy
+                )
+                this.copy(
+                    photos = (this.photos + photos).toPersistentList()
+                )
+            },
+        )
+        isDataLoaded = true
+    }
+
+    private fun updateUserLoggedState() {
+        setState(
+            block = {
+                this.copy(isUserLogged = sessionHandler.currentUser != null)
+            },
+            showLoading = false
         )
     }
 

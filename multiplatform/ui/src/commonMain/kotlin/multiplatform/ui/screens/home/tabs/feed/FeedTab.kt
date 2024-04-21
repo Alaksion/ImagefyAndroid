@@ -68,7 +68,7 @@ internal object FeedTab : HomeTab {
     override fun Content() {
         val model: FeedScreenModel = rememberScreenModel()
         val state by model.state.collectAsState()
-        LaunchedEffect(key1 = model) { model.initialize() }
+        LaunchedEffect(key1 = model) { model.resumeState() }
 
         FeedTabContent(
             state = state.data,
@@ -176,7 +176,8 @@ private fun FeedTabContent(
                     FeedPhotoCard(
                         data = photo,
                         modifier = Modifier.fillMaxWidth(),
-                        onFavorite = onFavorite
+                        onFavorite = onFavorite,
+                        showUserActions = state.isUserLogged
                     )
                     if (index != state.photos.lastIndex) {
                         VerticalSpacer(UnsplashSpacing.XSmall)

@@ -14,6 +14,7 @@ internal data class FeedState(
     val photos: ImmutableList<ListPhoto> = persistentListOf(),
     val orderBy: ListPhotoOrderBy = ListPhotoOrderBy.Latest,
     val isNextPageLoading: Boolean = false,
+    val isUserLogged: Boolean = false,
 )
 
 internal val ListPhotoOrderBy.icon: ImageVector

@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.tokens.UnsplashSpacing
 import multiplatform.ui.utils.rememberDeviceDimensions
 import multiplatform.ui.utils.rememberImageProportionalHeight
@@ -43,6 +44,7 @@ import multiplatform.ui.utils.rememberImageProportionalHeight
 @Composable
 internal fun FeedPhotoCard(
     data: ListPhoto,
+    showUserActions: Boolean,
     modifier: Modifier = Modifier,
     onFavorite: (Boolean, String) -> Unit,
 ) {
@@ -79,7 +81,8 @@ internal fun FeedPhotoCard(
             onLike = {
                 localIsLiked = localIsLiked.not()
                 onFavorite(localIsLiked, data.id)
-            }
+            },
+            showActions = showUserActions
         )
     }
 }
@@ -151,6 +154,34 @@ private fun Footer(
     modifier: Modifier = Modifier,
     description: String?,
     isLiked: Boolean,
+    showActions: Boolean,
+    onLike: () -> Unit,
+) {
+    Column(modifier = modifier) {
+        if (showActions) {
+            FooterActions(
+                isLiked = isLiked,
+                onLike = onLike,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+        VerticalSpacer(UnsplashSpacing.XSmall)
+        description?.let {
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = UnsplashSpacing.Medium)
+            )
+        }
+    }
+}
+
+@Composable
+private fun FooterActions(
+    isLiked: Boolean,
+    modifier: Modifier = Modifier,
     onLike: () -> Unit,
 ) {
     val colors = MaterialTheme.colorScheme
@@ -165,29 +196,18 @@ private fun Footer(
         else colors.onSurface
     }
 
-    Column(modifier = modifier) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        IconButton(
+            onClick = onLike
         ) {
-            IconButton(
-                onClick = onLike
-            ) {
-                Icon(imageVector = likeIcon, contentDescription = null, tint = likeIconTint)
-            }
-            IconButton(onClick = { }) {
-                Icon(imageVector = Icons.Outlined.BookmarkAdd, contentDescription = null)
-            }
+            Icon(imageVector = likeIcon, contentDescription = null, tint = likeIconTint)
         }
-        description?.let {
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = UnsplashSpacing.Medium)
-            )
+        IconButton(onClick = { }) {
+            Icon(imageVector = Icons.Outlined.BookmarkAdd, contentDescription = null)
         }
     }
 }

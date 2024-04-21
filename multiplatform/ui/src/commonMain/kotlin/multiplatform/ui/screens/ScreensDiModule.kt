@@ -27,7 +27,8 @@ internal val screensModule = DI.Module("prelogin") {
     bindProvider {
         FeedScreenModel(
             dispatcher = Dispatchers.Default,
-            photosRepository = instance()
+            photosRepository = instance(),
+            sessionHandler = instance()
         )
     }
 
