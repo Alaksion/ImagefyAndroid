@@ -57,7 +57,7 @@ internal object ProfileTab : HomeTab {
             onRequestLogin = {
                 val url = auth.buildAuthorizeUrl(
                     redirectUri = Config.AUTH_REDIRECT_URI,
-                    scopes = persistentSetOf(AuthorizationScope.Public)
+                    scopes = persistentSetOf(AuthorizationScope.Public, AuthorizationScope.WriteLikes)
                 )
                 requestBrowser(url = url, context)
             }
