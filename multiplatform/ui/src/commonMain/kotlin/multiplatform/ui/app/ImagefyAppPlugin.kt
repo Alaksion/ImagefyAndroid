@@ -4,7 +4,7 @@ import multiplatform.ui.listeners.LoginListener
 
 data class ImagefyAppPlugin(
     val keys: ImagefyAppKeys,
-    val loginListener: LoginListener
+    val loginListener: LoginListener,
 )
 
 data class ImagefyAppKeys(
