@@ -25,10 +25,11 @@
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/multiplatform" />
-            <option value="$PROJECT_DIR$/multiplatform/session" />
-            <option value="$PROJECT_DIR$/multiplatform/state-screenmodel" />
+            <option value="$PROJECT_DIR$/multiplatform/foundation" />
+            <option value="$PROJECT_DIR$/multiplatform/foundation/session" />
+            <option value="$PROJECT_DIR$/multiplatform/foundation/state-screenmodel" />
+            <option value="$PROJECT_DIR$/multiplatform/foundation/ui-event" />
             <option value="$PROJECT_DIR$/multiplatform/ui" />
-            <option value="$PROJECT_DIR$/multiplatform/ui-event" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
