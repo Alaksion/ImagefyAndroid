@@ -1,5 +1,5 @@
 plugins {
-    id("io.github.alaksion.imagefyandroid.kmp")
+    id("io.github.alaksion.imagefyandroid.kmpPublishable")
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlinCocoapods)
 }
@@ -13,9 +13,9 @@ kotlin {
                 implementation(libs.unsplash.wrapper)
 
                 // Project
-                implementation(projects.multiplatform.session)
-                implementation(projects.multiplatform.uiEvent)
-                implementation(projects.multiplatform.stateScreenmodel)
+                implementation(projects.multiplatform.foundation.session)
+                implementation(projects.multiplatform.foundation.uiEvent)
+                implementation(projects.multiplatform.foundation.stateScreenmodel)
 
                 // Kotlin Multiplatform
                 implementation(libs.kotlinx.datetime)

@@ -8,7 +8,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension
 
 internal fun Project.kotlinMultiplatformExtension(
-    extension: KotlinMultiplatformExtension
+    extension: KotlinMultiplatformExtension,
+    applyCocoapods: Boolean,
 ) = extension.apply {
     jvmToolchain(17)
 
@@ -26,5 +27,7 @@ internal fun Project.kotlinMultiplatformExtension(
     iosArm64()
     iosSimulatorArm64()
 
-    (this as ExtensionAware).extensions.configure<CocoapodsExtension>(::cocoapodsExtension)
+    if(applyCocoapods) {
+        (this as ExtensionAware).extensions.configure<CocoapodsExtension>(::cocoapodsExtension)
+    }
 }

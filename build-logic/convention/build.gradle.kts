@@ -13,7 +13,11 @@ gradlePlugin {
     plugins {
         register("kotlinMultiplatform") {
             id = "io.github.alaksion.imagefyandroid.kmp"
-            implementationClass = "buildLogic.convention.plugins.kmp.KotlinMultiplatformPlugin"
+            implementationClass = "buildLogic.convention.plugins.kmp.KmpLibraryPlugin"
+        }
+        register("kotlinMultiplatformPublishable") {
+            id = "io.github.alaksion.imagefyandroid.kmpPublishable"
+            implementationClass = "buildLogic.convention.plugins.kmp.KmpPublishableLibraryPlugin"
         }
     }
 }
