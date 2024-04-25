@@ -1,5 +1,6 @@
 package multiplatform.ui.screens.debug.list
 
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.CoroutineDispatcher
 import multiplatform.stateScreenmodel.MutedLogger
 import multiplatform.stateScreenmodel.StateScreenModel
@@ -17,10 +18,12 @@ internal class HttpListDebugViewScreenModel(
     fun initialize() {
         setState(
             block = {
+                val list = httpListener.httpRequests.map {
+                    it.toDebugViewRequestUiModel()
+                }
+
                 this.copy(
-                    requests = httpListener.httpRequests.map {
-                        it.toDebugViewRequestUiModel()
-                    }
+                    requests = list.toPersistentList()
                 )
             }
         )

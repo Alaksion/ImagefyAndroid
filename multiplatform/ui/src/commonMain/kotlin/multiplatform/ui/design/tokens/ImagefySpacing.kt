@@ -8,4 +8,7 @@ internal object ImagefySpacing {
     val Small = 12.dp
     val Medium = 16.dp
     val Large = 20.dp
+    val XLarge = 24.dp
+    val XLarge2 = 28.dp
+    val XLarge3 = 32.dp
 }
