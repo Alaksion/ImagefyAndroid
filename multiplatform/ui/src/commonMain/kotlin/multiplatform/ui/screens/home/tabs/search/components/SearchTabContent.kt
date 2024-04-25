@@ -33,13 +33,12 @@ import androidx.compose.ui.text.style.TextAlign
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.search.SearchPhotosItem
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.launch
-import multiplatform.stateScreenmodel.UiMode
 import multiplatform.stateScreenmodel.UiState
 import multiplatform.stateScreenmodel.View
 import multiplatform.ui.design.ErrorView
 import multiplatform.ui.design.Spacer
 import multiplatform.ui.design.autoscroll.AutoScroll
-import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.design.tokens.ImagefySpacing
 import multiplatform.ui.screens.home.tabs.search.SearchTabState
 
 internal sealed interface SearchTabAction {
@@ -121,7 +120,7 @@ private fun Header(
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(UnsplashSpacing.Medium)
+        horizontalArrangement = Arrangement.spacedBy(ImagefySpacing.Medium)
     ) {
         TextField(
             modifier = Modifier.weight(1f),

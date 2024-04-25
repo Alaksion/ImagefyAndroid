@@ -15,7 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.design.tokens.ImagefySpacing
 
 @Composable
 internal fun ProfileHeader(
@@ -25,7 +25,7 @@ internal fun ProfileHeader(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(UnsplashSpacing.Medium),
+        verticalArrangement = Arrangement.spacedBy(ImagefySpacing.Medium),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(

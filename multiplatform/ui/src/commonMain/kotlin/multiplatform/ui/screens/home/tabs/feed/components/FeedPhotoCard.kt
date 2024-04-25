@@ -37,7 +37,7 @@ import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import multiplatform.ui.design.VerticalSpacer
-import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.design.tokens.ImagefySpacing
 import multiplatform.ui.utils.rememberDeviceDimensions
 import multiplatform.ui.utils.rememberImageProportionalHeight
 
@@ -64,8 +64,8 @@ internal fun FeedPhotoCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = UnsplashSpacing.Small,
-                    vertical = UnsplashSpacing.XSmall
+                    horizontal = ImagefySpacing.Small,
+                    vertical = ImagefySpacing.XSmall
                 ),
             loadingColor = data.color.composeColor
         )
@@ -165,14 +165,14 @@ private fun Footer(
                 modifier = Modifier.fillMaxWidth()
             )
         }
-        VerticalSpacer(UnsplashSpacing.XSmall)
+        VerticalSpacer(ImagefySpacing.XSmall)
         description?.let {
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = UnsplashSpacing.Medium)
+                    .padding(horizontal = ImagefySpacing.Medium)
             )
         }
     }

@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhotoOrderBy
 import multiplatform.ui.design.BaseCard
 import multiplatform.ui.design.VerticalSpacer
-import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.design.tokens.ImagefySpacing
 import multiplatform.ui.screens.home.tabs.feed.icon
 import multiplatform.ui.screens.home.tabs.feed.text
 
@@ -49,26 +49,26 @@ internal fun OrderByModal(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = UnsplashSpacing.Medium)
+                    .padding(horizontal = ImagefySpacing.Medium)
                     .padding(bottom = bottomPadding)
             ) {
                 Text(
                     text = "Order photos by"
                 )
-                VerticalSpacer(UnsplashSpacing.Small)
+                VerticalSpacer(ImagefySpacing.Small)
                 Divider(modifier = Modifier.fillMaxWidth())
-                VerticalSpacer(UnsplashSpacing.Small)
+                VerticalSpacer(ImagefySpacing.Small)
                 ListPhotoOrderBy.entries.forEach { orderByItem ->
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = UnsplashSpacing.Small),
+                            .padding(vertical = ImagefySpacing.Small),
                         item = orderByItem,
                         isSelected = orderByItem == localSelection,
                         onClick = { localSelection = orderByItem }
                     )
                 }
-                VerticalSpacer(UnsplashSpacing.Medium)
+                VerticalSpacer(ImagefySpacing.Medium)
                 Button(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {

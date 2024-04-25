@@ -2,6 +2,7 @@ package multiplatform.ui.screens
 
 import io.github.alaksion.imagefy.features.prelogin.prelogin.PreLoginScreenModel
 import kotlinx.coroutines.Dispatchers
+import multiplatform.ui.screens.debug.list.HttpListDebugViewScreenModel
 import multiplatform.ui.screens.home.tabs.feed.FeedScreenModel
 import multiplatform.ui.screens.home.tabs.profile.ProfileTabScreenModel
 import multiplatform.ui.screens.home.tabs.search.SearchTabScreenModel
@@ -50,6 +51,13 @@ internal val screensModule = DI.Module("prelogin") {
         SearchTabScreenModel(
             dispatcher = Dispatchers.Default,
             searchRepository = instance()
+        )
+    }
+
+    bindProvider {
+        HttpListDebugViewScreenModel(
+            dispatcher = Dispatchers.Default,
+            httpListener = instance()
         )
     }
 }

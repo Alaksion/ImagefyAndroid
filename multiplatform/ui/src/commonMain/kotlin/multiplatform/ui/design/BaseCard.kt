@@ -7,12 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
-import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.design.tokens.ImagefySpacing
 
 @Composable
 internal fun BaseCard(
     modifier: Modifier = Modifier,
-    spacing: Dp = UnsplashSpacing.Small,
+    spacing: Dp = ImagefySpacing.Small,
     leading: (@Composable RowScope.() -> Unit)? = null,
     trailing: (@Composable RowScope.() -> Unit)? = null,
     content: @Composable RowScope.() -> Unit,

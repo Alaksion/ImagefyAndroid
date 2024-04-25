@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,14 +22,14 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.design.tokens.ImagefySpacing
 
 @Composable
 internal fun ErrorView(
     modifier: Modifier = Modifier,
-    icon: ImageVector,
-    title: String,
-    description: String,
+    icon: ImageVector = Icons.Outlined.Close,
+    title: String = "Something went wrong",
+    description: String = "Check your internet connection",
     primaryActionText: String? = null,
     primaryAction: (() -> Unit)? = null,
     secondaryActionText: String? = null,
@@ -44,10 +46,10 @@ internal fun ErrorView(
                 .size(128.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.onSurface)
-                .padding(UnsplashSpacing.Large),
+                .padding(ImagefySpacing.Large),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.surface)
         )
-        VerticalSpacer(size = UnsplashSpacing.Large)
+        VerticalSpacer(size = ImagefySpacing.Large)
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = title,
@@ -55,13 +57,13 @@ internal fun ErrorView(
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Center
         )
-        VerticalSpacer(size = UnsplashSpacing.XSmall)
+        VerticalSpacer(size = ImagefySpacing.XSmall)
         Text(
             text = description,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
         )
-        VerticalSpacer(size = UnsplashSpacing.Large)
+        VerticalSpacer(size = ImagefySpacing.Large)
 
         if (primaryAction != null && primaryActionText != null) {
             Button(
@@ -69,7 +71,7 @@ internal fun ErrorView(
             ) {
                 Text(primaryActionText)
             }
-            VerticalSpacer(size = UnsplashSpacing.Small)
+            VerticalSpacer(size = ImagefySpacing.Small)
         }
         if (secondaryAction != null && secondaryActionText != null) {
             Button(

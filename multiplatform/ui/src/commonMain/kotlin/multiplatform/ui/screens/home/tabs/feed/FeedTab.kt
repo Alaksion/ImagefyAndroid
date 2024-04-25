@@ -48,7 +48,7 @@ import multiplatform.ui.design.HorizontalSpacer
 import multiplatform.ui.design.LoadingView
 import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.autoscroll.AutoScroll
-import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.design.tokens.ImagefySpacing
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.feed.components.FeedPhotoCard
 import multiplatform.ui.screens.home.tabs.feed.components.OrderByModal
@@ -159,8 +159,8 @@ private fun FeedTabContent(
                             .fillMaxWidth()
                             .background(MaterialTheme.colorScheme.surfaceVariant)
                             .padding(
-                                horizontal = UnsplashSpacing.Medium,
-                                vertical = UnsplashSpacing.Small
+                                horizontal = ImagefySpacing.Medium,
+                                vertical = ImagefySpacing.Small
                             )
                             .clickable(
                                 onClick = { scope.launch { sheetState.show() } },
@@ -175,13 +175,13 @@ private fun FeedTabContent(
                             modifier = Modifier.size(16.dp),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        HorizontalSpacer(UnsplashSpacing.Small)
+                        HorizontalSpacer(ImagefySpacing.Small)
                         Text(
                             text = state.orderBy.text,
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        HorizontalSpacer(UnsplashSpacing.XSmall)
+                        HorizontalSpacer(ImagefySpacing.XSmall)
                         Icon(
                             imageVector = Icons.Outlined.ExpandMore,
                             contentDescription = null,
@@ -201,7 +201,7 @@ private fun FeedTabContent(
                         showUserActions = state.isUserLogged
                     )
                     if (index != state.photos.lastIndex) {
-                        VerticalSpacer(UnsplashSpacing.XSmall)
+                        VerticalSpacer(ImagefySpacing.XSmall)
                         Divider()
                     }
                 }

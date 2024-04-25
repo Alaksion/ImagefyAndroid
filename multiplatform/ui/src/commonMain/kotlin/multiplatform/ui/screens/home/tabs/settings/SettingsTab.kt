@@ -9,8 +9,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import cafe.adriel.voyager.kodein.rememberScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import multiplatform.ui.screens.debug.list.HttpListDebugViewScreen
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.feed.FeedTab
 import multiplatform.ui.screens.home.tabs.settings.components.SettingsAction
@@ -37,6 +39,7 @@ internal object SettingsTab : HomeTab {
         val model = rememberScreenModel<SettingsTabScreenModel>()
         val state by model.state.collectAsState()
         val tabNavigator = LocalTabNavigator.current
+        val navigator = LocalNavigator.current?.parent
 
         LaunchedEffect(key1 = model) {
             model.initialize()
@@ -53,6 +56,7 @@ internal object SettingsTab : HomeTab {
             onAction = { action ->
                 when (action) {
                     SettingsAction.Logout -> model.logout()
+                    SettingsAction.DebugView -> navigator?.push(HttpListDebugViewScreen())
                 }
             }
         )

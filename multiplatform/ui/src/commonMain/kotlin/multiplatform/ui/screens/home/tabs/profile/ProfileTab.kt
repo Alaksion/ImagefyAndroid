@@ -20,7 +20,7 @@ import io.github.alaksion.unsplashwrapper.api.models.authorization.domain.Author
 import io.github.alaksion.unsplashwrapper.platform.authentication.UnsplashAuth
 import kotlinx.collections.immutable.persistentSetOf
 import multiplatform.ui.app.Config
-import multiplatform.ui.design.tokens.UnsplashSpacing
+import multiplatform.ui.design.tokens.ImagefySpacing
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.profile.components.ProfileForm
 import multiplatform.ui.utils.rememberAppContext
@@ -79,7 +79,7 @@ internal object ProfileTab : HomeTab {
                     data = state.profile,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(UnsplashSpacing.Large)
+                        .padding(ImagefySpacing.Large)
                 )
             }
         }
