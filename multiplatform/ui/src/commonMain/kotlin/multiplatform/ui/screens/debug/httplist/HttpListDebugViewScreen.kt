@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
+import multiplatform.stateScreenmodel.UiState
 import multiplatform.stateScreenmodel.View
 import multiplatform.ui.design.BaseListItem
 import multiplatform.ui.design.ErrorView
@@ -55,9 +56,10 @@ class HttpListDebugViewScreen : Screen {
         }
         state.View(
             contentView = {
-                DebugViewContent(
-                    state = state.data,
-                    onBackClick = { navigator?.pop() }
+                HttpListStateContent(
+                    state = state,
+                    onBackClick = { navigator?.pop() },
+                    onItemClick = { navigator?.push(HttpDetailsScreen(it)) }
                 )
             },
             loadingView = { LoadingView(Modifier.fillMaxSize()) },
@@ -67,15 +69,34 @@ class HttpListDebugViewScreen : Screen {
 
 }
 
+@Composable
+internal fun HttpListStateContent(
+    state: UiState<HtppListState>,
+    onBackClick: () -> Unit,
+    onItemClick: (String) -> Unit
+) {
+    state.View(
+        contentView = {
+            HttpListContent(
+                data = state.data,
+                onBackClick = onBackClick,
+                onItemClick = onItemClick
+            )
+        },
+        errorView = { ErrorView(Modifier.fillMaxSize()) },
+        loadingView = { LoadingView(Modifier.fillMaxSize()) }
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun DebugViewContent(
-    state: HtppListState,
-    onBackClick: () -> Unit,
+private fun HttpListContent(
+    data: HtppListState,
+    onItemClick: (String) -> Unit,
+    onBackClick: () -> Unit
 ) {
-    val navigator = LocalNavigator.current
     val lazyListState = rememberLazyListState()
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
     Scaffold(
         topBar = {
@@ -107,7 +128,7 @@ internal fun DebugViewContent(
             state = lazyListState
         ) {
             items(
-                items = state.requests,
+                items = data.requests,
             ) { requestItem ->
                 HttpCallListItem(
                     modifier = Modifier.fillMaxWidth(),
@@ -115,7 +136,7 @@ internal fun DebugViewContent(
                     code = requestItem.code,
                     url = requestItem.url,
                     timeStamp = requestItem.timeStamp,
-                    onItemClick = { navigator?.push(HttpDetailsScreen(requestItem.localId)) }
+                    onItemClick = { onItemClick(requestItem.localId) }
                 )
             }
         }

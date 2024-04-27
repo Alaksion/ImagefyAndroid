@@ -19,9 +19,7 @@ internal class HttpListScreenModel(
     fun initialize() {
         setState(
             block = {
-                val list = httpListener.httpRequests.map {
-                    it.toDebugViewRequestUiModel()
-                }
+                val list = httpListener.httpRequests
 
                 this.copy(
                     requests = list.toPersistentList()

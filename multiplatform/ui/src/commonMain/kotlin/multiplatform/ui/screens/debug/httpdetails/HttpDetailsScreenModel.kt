@@ -14,4 +14,16 @@ internal class HttpDetailsScreenModel(
     logger = logger,
     initialState = HttpDetailsState()
 ) {
+
+    fun initialize(requestLocalId: String) = setState(
+        block = {
+            val request = httpListener.httpRequests.find { it.localId == requestLocalId }
+                ?: throw IllegalArgumentException("Http call not found")
+
+            this.copy(
+                request = request
+            )
+        }
+    )
+
 }
