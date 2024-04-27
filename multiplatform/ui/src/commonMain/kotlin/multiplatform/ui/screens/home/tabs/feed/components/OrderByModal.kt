@@ -22,7 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhotoOrderBy
-import multiplatform.ui.design.BaseCard
+import multiplatform.ui.design.BaseListItem
 import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.tokens.ImagefySpacing
 import multiplatform.ui.screens.home.tabs.feed.icon
@@ -97,7 +97,7 @@ private fun Card(
         else colorScheme.onSurface.copy(alpha = 0.5f)
     }
 
-    BaseCard(
+    BaseListItem(
         modifier = modifier
             .clickable(enabled = isSelected.not(), onClick = onClick),
         leading = {

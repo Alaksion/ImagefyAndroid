@@ -1,31 +1,45 @@
 package multiplatform.ui.screens.debug.list
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
 import multiplatform.stateScreenmodel.View
+import multiplatform.ui.design.BaseListItem
 import multiplatform.ui.design.ErrorView
 import multiplatform.ui.design.LoadingView
+import multiplatform.ui.design.VerticalSpacer
+import multiplatform.ui.design.tokens.ImagefySpacing
+import multiplatform.ui.screens.debug.components.HttpCodeTag
+import multiplatform.ui.screens.debug.components.HttpMethodTag
 
 class HttpListDebugViewScreen : Screen {
 
@@ -33,13 +47,17 @@ class HttpListDebugViewScreen : Screen {
     override fun Content() {
         val model = rememberScreenModel<HttpListDebugViewScreenModel>()
         val state by model.state.collectAsState()
+        val navigator = LocalNavigator.current
 
         LaunchedEffect(Unit) {
             model.initialize()
         }
         state.View(
             contentView = {
-                DebugViewContent(state.data)
+                DebugViewContent(
+                    state = state.data,
+                    onBackClick = { navigator?.pop() }
+                )
             },
             loadingView = { LoadingView(Modifier.fillMaxSize()) },
             errorView = { ErrorView() }
@@ -51,11 +69,15 @@ class HttpListDebugViewScreen : Screen {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DebugViewContent(
-    state: DebugViewState
+    state: DebugViewState,
+    onBackClick: () -> Unit,
 ) {
+    val lazyListState = rememberLazyListState()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
     Scaffold(
         topBar = {
-            TopAppBar(
+            MediumTopAppBar(
                 title = {
                     Text(
                         text = "Http Requests",
@@ -64,11 +86,12 @@ internal fun DebugViewContent(
                 },
                 navigationIcon = {
                     IconButton(
-                        onClick = {},
+                        onClick = onBackClick,
                     ) {
                         Icon(imageVector = Icons.Outlined.ArrowBack, null)
                     }
-                }
+                },
+                scrollBehavior = scrollBehavior
             )
         }
     ) {
@@ -76,15 +99,71 @@ internal fun DebugViewContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
+                .nestedScroll(scrollBehavior.nestedScrollConnection),
+            contentPadding = PaddingValues(ImagefySpacing.Medium),
+            verticalArrangement = Arrangement.spacedBy(ImagefySpacing.Medium),
+            state = lazyListState
         ) {
             items(
                 items = state.requests,
-            ) {
-                Text(
-                    "Hello world${it.code}",
-                    modifier = Modifier.fillMaxWidth().background(Color.Yellow)
+            ) { requestItem ->
+                HttpCallListItem(
+                    modifier = Modifier.fillMaxWidth(),
+                    method = requestItem.method,
+                    code = requestItem.code,
+                    url = requestItem.url,
+                    timeStamp = requestItem.timeStamp
                 )
             }
         }
     }
+}
+
+@Composable
+private fun HttpCallListItem(
+    modifier: Modifier = Modifier,
+    code: Int,
+    method: String,
+    url: String,
+    timeStamp: String,
+) {
+    Card {
+        BaseListItem(
+            modifier = modifier.padding(ImagefySpacing.Small),
+            leading = {
+                Column {
+                    HttpMethodTag(method)
+                    VerticalSpacer(ImagefySpacing.XSmall)
+                    HttpCodeTag(code)
+                }
+            },
+            trailing = {
+                IconButton(
+                    onClick = {}
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.ChevronRight,
+                        null
+                    )
+                }
+            },
+            content = {
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        text = url,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 1,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    VerticalSpacer(ImagefySpacing.XSmall)
+                    Text(
+                        text = timeStamp,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        )
+    }
+
 }

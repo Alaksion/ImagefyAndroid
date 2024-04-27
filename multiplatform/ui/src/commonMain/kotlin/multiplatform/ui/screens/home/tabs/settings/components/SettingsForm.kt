@@ -15,7 +15,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import multiplatform.ui.design.BaseCard
+import multiplatform.ui.design.BaseListItem
 import multiplatform.ui.design.Spacer
 import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.tokens.ImagefySpacing
@@ -37,7 +37,7 @@ internal fun SettingsForm(
             style = MaterialTheme.typography.headlineSmall
         )
         VerticalSpacer(ImagefySpacing.XLarge3)
-        BaseCard(
+        BaseListItem(
             modifier = Modifier.fillMaxWidth().clickable {
                 onAction(SettingsAction.DebugView)
             },
