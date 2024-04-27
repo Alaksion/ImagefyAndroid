@@ -1,4 +1,4 @@
-package multiplatform.ui.screens.debug.list
+package multiplatform.ui.screens.debug.httplist
 
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.CoroutineDispatcher
@@ -6,13 +6,13 @@ import multiplatform.stateScreenmodel.MutedLogger
 import multiplatform.stateScreenmodel.StateScreenModel
 import multiplatform.ui.listeners.AppHttpListener
 
-internal class HttpListDebugViewScreenModel(
+internal class HttpListScreenModel(
     dispatcher: CoroutineDispatcher,
     private val httpListener: AppHttpListener
-) : StateScreenModel<DebugViewState>(
+) : StateScreenModel<HtppListState>(
     dispatcher = dispatcher,
     logger = MutedLogger,
-    initialState = DebugViewState()
+    initialState = HtppListState()
 ) {
 
     fun initialize() {

@@ -1,11 +1,11 @@
-package multiplatform.ui.screens.debug.list
+package multiplatform.ui.screens.debug.httplist
 
 import io.github.alaksion.unsplashwrapper.platform.listeners.HttpResponse
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import multiplatform.ui.utils.generateUUID
 
-internal data class DebugViewState(
+internal data class HtppListState(
     val requests: ImmutableList<DebugViewRequestUiModel> = persistentListOf()
 )
 

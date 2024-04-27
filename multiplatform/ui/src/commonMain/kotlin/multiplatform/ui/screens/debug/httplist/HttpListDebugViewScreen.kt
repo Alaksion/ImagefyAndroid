@@ -1,4 +1,4 @@
-package multiplatform.ui.screens.debug.list
+package multiplatform.ui.screens.debug.httplist
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -40,12 +40,13 @@ import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.tokens.ImagefySpacing
 import multiplatform.ui.screens.debug.components.HttpCodeTag
 import multiplatform.ui.screens.debug.components.HttpMethodTag
+import multiplatform.ui.screens.debug.httpdetails.HttpDetailsScreen
 
 class HttpListDebugViewScreen : Screen {
 
     @Composable
     override fun Content() {
-        val model = rememberScreenModel<HttpListDebugViewScreenModel>()
+        val model = rememberScreenModel<HttpListScreenModel>()
         val state by model.state.collectAsState()
         val navigator = LocalNavigator.current
 
@@ -69,9 +70,10 @@ class HttpListDebugViewScreen : Screen {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DebugViewContent(
-    state: DebugViewState,
+    state: HtppListState,
     onBackClick: () -> Unit,
 ) {
+    val navigator = LocalNavigator.current
     val lazyListState = rememberLazyListState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
@@ -112,7 +114,8 @@ internal fun DebugViewContent(
                     method = requestItem.method,
                     code = requestItem.code,
                     url = requestItem.url,
-                    timeStamp = requestItem.timeStamp
+                    timeStamp = requestItem.timeStamp,
+                    onItemClick = { navigator?.push(HttpDetailsScreen(requestItem.localId)) }
                 )
             }
         }
@@ -126,6 +129,7 @@ private fun HttpCallListItem(
     method: String,
     url: String,
     timeStamp: String,
+    onItemClick: () -> Unit,
 ) {
     Card {
         BaseListItem(
@@ -139,7 +143,7 @@ private fun HttpCallListItem(
             },
             trailing = {
                 IconButton(
-                    onClick = {}
+                    onClick = onItemClick
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.ChevronRight,

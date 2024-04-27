@@ -12,7 +12,7 @@ import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import multiplatform.ui.screens.debug.list.HttpListDebugViewScreen
+import multiplatform.ui.screens.debug.httplist.HttpListDebugViewScreen
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.feed.FeedTab
 import multiplatform.ui.screens.home.tabs.settings.components.SettingsAction
