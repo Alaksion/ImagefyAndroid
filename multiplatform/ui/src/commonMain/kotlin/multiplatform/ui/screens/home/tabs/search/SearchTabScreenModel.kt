@@ -11,6 +11,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.foundation.logger.AppLogger
 import multiplatform.stateScreenmodel.StateScreenModel
 
 internal data class SearchTabState(
@@ -26,10 +27,12 @@ internal data class SearchTabState(
 
 internal class SearchTabScreenModel(
     private val searchRepository: UnsplashSearchRepository,
-    dispatcher: CoroutineDispatcher
+    dispatcher: CoroutineDispatcher,
+    logger: AppLogger,
 ) : StateScreenModel<SearchTabState>(
     dispatcher = dispatcher,
-    initialState = SearchTabState()
+    initialState = SearchTabState(),
+    logger = logger
 ) {
 
     private var currentPage = 0

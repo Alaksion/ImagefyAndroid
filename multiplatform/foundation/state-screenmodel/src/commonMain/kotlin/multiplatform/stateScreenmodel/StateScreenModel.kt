@@ -8,10 +8,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import multiplatform.foundation.logger.AppLogger
+
+private const val STATE_SCREENMODEL_ERROR_TAG = "screenmodel-error"
 
 abstract class StateScreenModel<T>(
     private val dispatcher: CoroutineDispatcher,
-    private val logger: StateLogger = MutedLogger,
+    private val logger: AppLogger,
     initialState: T,
     initialMode: UiMode = UiMode.Content
 ) : ScreenModel {
@@ -61,7 +64,10 @@ abstract class StateScreenModel<T>(
                 }
             },
             onFailure = { error ->
-                logger.log(error.message.orEmpty(), type = LogType.Error)
+                logger.logError(
+                    message = error.toString(),
+                    tag = STATE_SCREENMODEL_ERROR_TAG
+                )
                 _state.update { old -> old.copy(mode = UiMode.Error(error)) }
             }
         )

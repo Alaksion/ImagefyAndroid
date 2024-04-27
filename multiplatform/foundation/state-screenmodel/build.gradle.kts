@@ -15,6 +15,7 @@ kotlin {
                 // Kotlin Multiplatform
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.collections.immutable)
+                implementation(projects.multiplatform.foundation.logger)
 
                 // Voyager
                 implementation(libs.bundles.voyager)

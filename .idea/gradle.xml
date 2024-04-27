@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/multiplatform" />
             <option value="$PROJECT_DIR$/multiplatform/foundation" />
+            <option value="$PROJECT_DIR$/multiplatform/foundation/logger" />
             <option value="$PROJECT_DIR$/multiplatform/foundation/session" />
             <option value="$PROJECT_DIR$/multiplatform/foundation/state-screenmodel" />
             <option value="$PROJECT_DIR$/multiplatform/foundation/ui-event" />

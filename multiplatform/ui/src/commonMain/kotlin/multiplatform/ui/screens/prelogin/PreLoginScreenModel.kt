@@ -2,6 +2,7 @@ package io.github.alaksion.imagefy.features.prelogin.prelogin
 
 
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.foundation.logger.AppLogger
 import multiplatform.stateScreenmodel.StateScreenModel
 import multiplatform.uiEvent.UiEventQueue
 import multiplatform.uiEvent.UiEventQueueHandler
@@ -13,10 +14,12 @@ internal enum class PreLoginEvents {
 
 internal class PreLoginScreenModel(
     private val sessionHandler: SessionHandler,
-    dispatcher: CoroutineDispatcher
+    dispatcher: CoroutineDispatcher,
+    logger: AppLogger,
 ) : StateScreenModel<Unit>(
     initialState = Unit,
-    dispatcher = dispatcher
+    dispatcher = dispatcher,
+    logger = logger
 ), UiEventQueue<PreLoginEvents> by UiEventQueueHandler() {
 
     fun initialize() {

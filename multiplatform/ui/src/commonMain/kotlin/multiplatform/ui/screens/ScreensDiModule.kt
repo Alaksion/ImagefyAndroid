@@ -17,27 +17,31 @@ internal val screensModule = DI.Module("prelogin") {
     bindProvider {
         PreLoginScreenModel(
             sessionHandler = instance(),
-            dispatcher = Dispatchers.Default
+            dispatcher = Dispatchers.Default,
+            logger = instance()
         )
     }
     bindProvider {
         LoginHandlerScreenModel(
             dispatcher = Dispatchers.Default,
-            authHandler = instance()
+            authHandler = instance(),
+            logger = instance()
         )
     }
     bindProvider {
         FeedScreenModel(
             dispatcher = Dispatchers.Default,
             photosRepository = instance(),
-            sessionHandler = instance()
+            sessionHandler = instance(),
+            logger = instance()
         )
     }
 
     bindProvider {
         ProfileTabScreenModel(
             dispatcher = Dispatchers.Default,
-            sessionHandler = instance()
+            sessionHandler = instance(),
+            logger = instance()
         )
     }
 
@@ -45,27 +49,31 @@ internal val screensModule = DI.Module("prelogin") {
         SettingsTabScreenModel(
             dispatcher = Dispatchers.Default,
             sessionHandler = instance(),
+            logger = instance()
         )
     }
 
     bindProvider {
         SearchTabScreenModel(
             dispatcher = Dispatchers.Default,
-            searchRepository = instance()
+            searchRepository = instance(),
+            logger = instance()
         )
     }
 
     bindProvider {
         HttpListScreenModel(
             dispatcher = Dispatchers.Default,
-            httpListener = instance()
+            httpListener = instance(),
+            logger = instance()
         )
     }
 
     bindProvider {
         HttpDetailsScreenModel(
             dispatcher = Dispatchers.Default,
-            httpListener = instance()
+            httpListener = instance(),
+            logger = instance()
         )
     }
 }

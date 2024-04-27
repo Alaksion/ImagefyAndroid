@@ -2,6 +2,7 @@ package multiplatform.ui.screens.home.tabs.profile
 
 import io.github.alaksion.unsplashwrapper.api.models.currentuser.domain.CurrentUser
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.foundation.logger.AppLogger
 import multiplatform.stateScreenmodel.StateScreenModel
 import mutiplatform.session.SessionHandler
 
@@ -11,10 +12,12 @@ internal data class ProfileTabState(
 
 internal class ProfileTabScreenModel(
     dispatcher: CoroutineDispatcher,
-    private val sessionHandler: mutiplatform.session.SessionHandler,
+    logger: AppLogger,
+    private val sessionHandler: SessionHandler,
 ) : StateScreenModel<ProfileTabState>(
     initialState = ProfileTabState(),
-    dispatcher = dispatcher
+    dispatcher = dispatcher,
+    logger = logger
 ) {
 
     fun initialize() {

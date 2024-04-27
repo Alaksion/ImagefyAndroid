@@ -4,6 +4,7 @@ import io.github.alaksion.unsplashwrapper.api.models.photo.domain.list.ListPhoto
 import io.github.alaksion.unsplashwrapper.api.repositories.UnsplashPhotosRepository
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.CoroutineDispatcher
+import multiplatform.foundation.logger.AppLogger
 import multiplatform.stateScreenmodel.StateScreenModel
 import mutiplatform.session.SessionHandler
 
@@ -12,11 +13,13 @@ private const val PAGE_LIMIT = 10
 
 internal class FeedScreenModel(
     dispatcher: CoroutineDispatcher,
+    logger: AppLogger,
     private val photosRepository: UnsplashPhotosRepository,
     private val sessionHandler: SessionHandler,
 ) : StateScreenModel<FeedState>(
     dispatcher = dispatcher,
-    initialState = FeedState()
+    initialState = FeedState(),
+    logger = logger
 ) {
     private var isDataLoaded = false
     private var currentPage = 1
