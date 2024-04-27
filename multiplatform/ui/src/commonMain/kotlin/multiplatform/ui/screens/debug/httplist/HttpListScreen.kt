@@ -43,7 +43,7 @@ import multiplatform.ui.screens.debug.components.HttpCodeTag
 import multiplatform.ui.screens.debug.components.HttpMethodTag
 import multiplatform.ui.screens.debug.httpdetails.HttpDetailsScreen
 
-class HttpListDebugViewScreen : Screen {
+internal class HttpListScreen : Screen {
 
     @Composable
     override fun Content() {

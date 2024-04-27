@@ -12,7 +12,7 @@ import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import multiplatform.ui.screens.debug.httplist.HttpListDebugViewScreen
+import multiplatform.ui.screens.debug.httplist.HttpListScreen
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.feed.FeedTab
 import multiplatform.ui.screens.home.tabs.settings.components.SettingsAction
@@ -56,7 +56,7 @@ internal object SettingsTab : HomeTab {
             onAction = { action ->
                 when (action) {
                     SettingsAction.Logout -> model.logout()
-                    SettingsAction.DebugView -> navigator?.push(HttpListDebugViewScreen())
+                    SettingsAction.DebugView -> navigator?.push(HttpListScreen())
                 }
             }
         )
