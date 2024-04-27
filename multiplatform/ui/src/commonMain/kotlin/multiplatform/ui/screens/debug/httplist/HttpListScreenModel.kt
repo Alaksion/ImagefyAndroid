@@ -15,17 +15,22 @@ internal class HttpListScreenModel(
     logger = logger,
     initialState = HtppListState()
 ) {
+    var isInitialized = false
 
     fun initialize() {
-        setState(
-            block = {
-                val list = httpListener.httpRequests
+        if (isInitialized.not()) {
+            setState(
+                block = {
+                    val list = httpListener.httpRequests
 
-                this.copy(
-                    requests = list.toPersistentList()
-                )
+                    this.copy(
+                        requests = list.toPersistentList()
+                    )
+                }
+            ).invokeOnCompletion {
+                if (it == null) isInitialized = true
             }
-        )
+        }
     }
 
 }
