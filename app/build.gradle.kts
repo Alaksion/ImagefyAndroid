@@ -72,32 +72,10 @@ dependencies {
     implementation(libs.unsplash.wrapper)
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-
-    // Compose
-    implementation(compose.ui)
-    implementation(compose.uiTooling)
-    implementation(compose.material3)
-    implementation(compose.materialIconsExtended)
     implementation(libs.compose.activity)
-    implementation(libs.kamel)
-
-    // Compose Debug
-    debugImplementation(compose.uiTooling)
-    @OptIn(ExperimentalComposeLibrary::class)
-//    debugImplementation(compose.uiTest)
 
     // Test
     testImplementation(kotlin("test"))
-
-    // Kotlin
-    implementation(libs.kotlinx.datetime)
-    implementation(libs.kotlinx.collections.immutable)
-
-    // Voyager
-    implementation(libs.bundles.voyager)
-
-    // DI
-    implementation(libs.kodein)
 
     // Projects
     implementation(projects.multiplatform.ui)

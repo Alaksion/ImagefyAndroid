@@ -1,6 +1,5 @@
 plugins {
     id("io.github.alaksion.imagefyandroid.kmp")
-    alias(libs.plugins.jetbrains.compose)
 }
 
 kotlin {
