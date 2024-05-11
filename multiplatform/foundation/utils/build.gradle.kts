@@ -7,18 +7,9 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                // Projects
-                implementation(projects.multiplatform.foundation.utils)
-
-                // Compose
-                implementation(compose.ui)
-
                 // Kotlin Multiplatform
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.collections.immutable)
-
-                // Coroutines
-                implementation(libs.coroutines.core)
             }
         }
 
