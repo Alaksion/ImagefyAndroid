@@ -23,11 +23,23 @@ internal fun Project.kotlinMultiplatformExtension(
         }
     }
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    val projectName = path.split(":").drop(1)
+        .joinToString(separator = ".")
+        .replace("-", "")
 
-    if(applyCocoapods) {
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = projectName
+            isStatic = true
+        }
+    }
+
+
+    if (applyCocoapods) {
         (this as ExtensionAware).extensions.configure<CocoapodsExtension>(::cocoapodsExtension)
     }
 }
