@@ -1,6 +1,9 @@
 package multiplatform.ui.screens.home.tabs.profile
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
@@ -19,8 +22,11 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import io.github.alaksion.unsplashwrapper.api.models.authorization.domain.AuthorizationScope
 import io.github.alaksion.unsplashwrapper.platform.authentication.UnsplashAuth
 import kotlinx.collections.immutable.persistentSetOf
+import multiplatform.stateScreenmodel.View
 import multiplatform.ui.app.Config
+import multiplatform.ui.design.LoadingView
 import multiplatform.ui.design.tokens.ImagefySpacing
+import multiplatform.ui.screens.home.HomeNavBar
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.profile.components.ProfileForm
 import multiplatform.ui.utils.rememberAppContext
@@ -52,24 +58,50 @@ internal object ProfileTab : HomeTab {
 
         LaunchedEffect(key1 = model) { model.initialize() }
 
-        ProfileTabContent(
-            state = state.data,
-            onRequestLogin = {
-                val url = auth.buildAuthorizeUrl(
-                    redirectUri = Config.AUTH_REDIRECT_URI,
-                    scopes = persistentSetOf(AuthorizationScope.Public, AuthorizationScope.WriteLikes)
+        Scaffold(
+            modifier = Modifier.navigationBarsPadding(),
+            bottomBar = {
+                HomeNavBar(
+                    modifier = Modifier.fillMaxWidth(),
                 )
-                requestBrowser(url = url, context)
-            }
+            },
+            content = { scaffoldPadding ->
+                state.View(
+                    contentView = {
+                        ProfileTabContent(
+                            modifier = Modifier.fillMaxSize().padding(scaffoldPadding),
+                            state = state.data,
+                            onRequestLogin = {
+                                val url = auth.buildAuthorizeUrl(
+                                    redirectUri = Config.AUTH_REDIRECT_URI,
+                                    scopes = persistentSetOf(
+                                        AuthorizationScope.Public,
+                                        AuthorizationScope.WriteLikes
+                                    )
+                                )
+                                requestBrowser(url = url, context)
+                            }
+                        )
+                    },
+                    loadingView = {
+                        LoadingView(Modifier.fillMaxSize())
+                    },
+                    errorView = {
+                        Text("error")
+                    }
+                )
+            },
         )
     }
 
     @Composable
     fun ProfileTabContent(
+        modifier: Modifier = Modifier,
         state: ProfileTabState,
         onRequestLogin: () -> Unit
     ) {
-        Scaffold {
+        Column(modifier) {
+
             if (state.profile == null) {
                 Button(onClick = onRequestLogin) {
                     Text("Login")

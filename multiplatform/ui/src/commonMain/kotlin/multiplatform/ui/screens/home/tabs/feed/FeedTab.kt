@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,6 +27,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -49,6 +51,7 @@ import multiplatform.ui.design.LoadingView
 import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.autoscroll.AutoScroll
 import multiplatform.ui.design.tokens.ImagefySpacing
+import multiplatform.ui.screens.home.HomeNavBar
 import multiplatform.ui.screens.home.tabs.HomeTab
 import multiplatform.ui.screens.home.tabs.feed.components.FeedPhotoCard
 import multiplatform.ui.screens.home.tabs.feed.components.OrderByModal
@@ -74,28 +77,39 @@ internal object FeedTab : HomeTab {
         val state by model.state.collectAsState()
         LaunchedEffect(key1 = model) { model.resumeState(force = false) }
 
-        state.View(
-            contentView = {
-                FeedTabContent(
-                    state = state.data,
-                    updateOrderBy = model::updateOrderBy,
-                    onRequestNextPage = model::loadNextPage,
-                    onFavorite = model::favoritePost
+        Scaffold(
+            modifier = Modifier.navigationBarsPadding(),
+            bottomBar = {
+                HomeNavBar(
+                    modifier = Modifier.fillMaxWidth(),
                 )
             },
-            loadingView = {
-                LoadingView(Modifier.fillMaxSize())
-            },
-            errorView = {
-                ErrorView(
-                    modifier = Modifier.fillMaxSize(),
-                    description = "Check your internet connection",
-                    icon = Icons.Outlined.Close,
-                    title = "Something went wrong",
-                    primaryAction = { model.resumeState(force = true) },
-                    primaryActionText = "Retry"
+            content = { scaffoldPadding ->
+                state.View(
+                    contentView = {
+                        FeedTabContent(
+                            modifier = Modifier.fillMaxSize().padding(scaffoldPadding),
+                            state = state.data,
+                            updateOrderBy = model::updateOrderBy,
+                            onRequestNextPage = model::loadNextPage,
+                            onFavorite = model::favoritePost
+                        )
+                    },
+                    loadingView = {
+                        LoadingView(Modifier.fillMaxSize())
+                    },
+                    errorView = {
+                        ErrorView(
+                            modifier = Modifier.fillMaxSize(),
+                            description = "Check your internet connection",
+                            icon = Icons.Outlined.Close,
+                            title = "Something went wrong",
+                            primaryAction = { model.resumeState(force = true) },
+                            primaryActionText = "Retry"
+                        )
+                    }
                 )
-            }
+            },
         )
     }
 
@@ -104,6 +118,7 @@ internal object FeedTab : HomeTab {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun FeedTabContent(
+    modifier: Modifier = Modifier,
     state: FeedState,
     updateOrderBy: (ListPhotoOrderBy) -> Unit,
     onRequestNextPage: () -> Unit,
@@ -128,7 +143,7 @@ private fun FeedTabContent(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier
     ) {
         if (sheetState.isVisible) {
             OrderByModal(

@@ -2,9 +2,7 @@ package multiplatform.ui.screens.home.tabs.settings.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material.icons.outlined.ChevronRight
@@ -23,13 +21,12 @@ import multiplatform.ui.screens.home.tabs.settings.SettingsTabState
 
 @Composable
 internal fun SettingsForm(
+    modifier: Modifier = Modifier,
     state: SettingsTabState,
     onAction: (SettingsAction) -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(ImagefySpacing.Large),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(

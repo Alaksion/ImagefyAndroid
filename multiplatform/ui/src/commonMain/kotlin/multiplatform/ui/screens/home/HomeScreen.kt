@@ -1,13 +1,8 @@
 package multiplatform.ui.screens.home
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -33,24 +28,8 @@ internal class HomeScreen : Screen {
     fun HomeScreenContent() {
         TabNavigator(
             FeedTab,
-        ) { navigator ->
-            Scaffold(
-                modifier = Modifier.navigationBarsPadding(),
-                content = { scaffoldPadding ->
-                    Surface(modifier = Modifier.padding(scaffoldPadding)) {
-                        CurrentTab()
-                    }
-                },
-                bottomBar = {
-                    BottomBar(
-                        modifier = Modifier.fillMaxWidth(),
-                        selectedTab = navigator.current,
-                        onTabSelected = { selectedTab ->
-                            navigator.current = selectedTab
-                        },
-                    )
-                }
-            )
+        ) {
+            CurrentTab()
         }
     }
 

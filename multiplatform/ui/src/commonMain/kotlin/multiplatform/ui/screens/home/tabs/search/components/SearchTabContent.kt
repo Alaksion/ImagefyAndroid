@@ -25,7 +25,6 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
@@ -47,9 +46,10 @@ internal sealed interface SearchTabAction {
     object SubmitSearch : SearchTabAction
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SearchTabContent(
+    modifier: Modifier = Modifier,
     state: UiState<SearchTabState>,
     onAction: (SearchTabAction) -> Unit
 ) {
@@ -57,7 +57,7 @@ internal fun SearchTabContent(
     val scope = rememberCoroutineScope()
     val keyboard = LocalSoftwareKeyboardController.current
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = modifier) {
         if (sheetState.isVisible) {
             SearchTabFilterModal(
                 state = sheetState,
