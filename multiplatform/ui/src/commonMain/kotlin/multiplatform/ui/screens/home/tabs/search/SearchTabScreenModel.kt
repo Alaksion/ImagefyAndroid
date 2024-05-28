@@ -15,6 +15,7 @@ import multiplatform.foundation.logger.AppLogger
 import multiplatform.stateScreenmodel.StateScreenModel
 
 internal data class SearchTabState(
+    val initialized: Boolean = false,
     val query: String = "",
     val page: Int = 0,
     val orderBy: SearchPhotosOrderBy = SearchPhotosOrderBy.Relevant,
@@ -36,19 +37,19 @@ internal class SearchTabScreenModel(
 ) {
 
     private var currentPage = 0
-    private var isInitialized = false
 
-    fun search(force: Boolean) {
-        if (isInitialized && force.not()) return
+    fun search() {
+        if (currentData.query.isEmpty()) return
+
         setState(
             block = {
                 val fetchPhotos = getPhotos()
                 this.copy(
-                    photos = fetchPhotos.results
+                    photos = fetchPhotos.results,
+                    initialized = true
                 )
             }
         )
-        isInitialized = true
     }
 
     fun updateQuery(query: String) = setState(
@@ -58,7 +59,7 @@ internal class SearchTabScreenModel(
     )
 
     fun loadNextPage() {
-        if (currentData.isLoadingNextPage || isInitialized.not()) return
+        if (currentData.isLoadingNextPage) return
         updateState(
             block = {
                 currentPage++
