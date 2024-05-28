@@ -35,6 +35,7 @@ import multiplatform.ui.design.LoadingView
 import multiplatform.ui.design.VerticalSpacer
 import multiplatform.ui.design.scrollcontainer.HorizontalScrollContainer
 import multiplatform.ui.design.tokens.ImagefySpacing
+import multiplatform.ui.screens.debug.components.DebugScrollableItem
 import multiplatform.ui.screens.debug.components.HttpCodeTag
 import multiplatform.ui.screens.debug.components.HttpMethodTag
 
@@ -132,22 +133,14 @@ private fun HttpDetailsContent(
                 style = MaterialTheme.typography.bodyLarge
             )
             VerticalSpacer(ImagefySpacing.XSmall)
-            HorizontalScrollContainer(
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(
-                    text = data.request.url,
-                )
-            }
-        }
-        item {
-            HorizontalScrollContainer(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = data.request.body,
-                )
-            }
+            DebugScrollableItem(
+                title = "Request URL",
+                content = data.request.url
+            )
+            DebugScrollableItem(
+                title = "Response Body",
+                content = "TODO"
+            )
         }
     }
 }
