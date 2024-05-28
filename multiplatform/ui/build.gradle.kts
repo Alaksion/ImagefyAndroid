@@ -2,6 +2,7 @@ plugins {
     id("io.github.alaksion.imagefyandroid.kmpPublishable")
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.jetbrains.composeKotlin)
 }
 
 kotlin {
