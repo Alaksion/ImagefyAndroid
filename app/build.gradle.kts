@@ -75,6 +75,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation(libs.compose.activity)
 
+    implementation(libs.kodein.core)
+    implementation(libs.kodein.android)
+
     // Test
     testImplementation(kotlin("test"))
 

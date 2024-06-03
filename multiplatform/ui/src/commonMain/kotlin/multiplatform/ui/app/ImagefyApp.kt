@@ -10,24 +10,20 @@ import io.github.alaksion.imagefy.features.prelogin.prelogin.PreLoginScreen
 import io.github.alaksion.unsplashwrapper.sdk.UnsplashWrapperSdk
 import kotlinx.coroutines.flow.collectLatest
 import multiplatform.ui.design.theme.ImagefyTheme
-import multiplatform.ui.di.appModule
 import multiplatform.ui.listeners.AppHttpListener
 import multiplatform.ui.screens.loginhandler.LoginHandlerScreen
 import org.kodein.di.compose.rememberInstance
-import org.kodein.di.compose.withDI
 
 @Composable
 fun ImagefyApp(
     plugin: ImagefyAppPlugin
 ) {
-    withDI(appModule) {
-        ImagefyTheme {
-            Navigator(
-                screens = listOf(PreLoginScreen())
-            ) { _ ->
-                AppEffects(plugin = plugin)
-                CurrentScreen()
-            }
+    ImagefyTheme {
+        Navigator(
+            screens = listOf(PreLoginScreen())
+        ) { _ ->
+            AppEffects(plugin = plugin)
+            CurrentScreen()
         }
     }
 }

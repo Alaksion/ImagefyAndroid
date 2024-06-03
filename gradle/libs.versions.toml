@@ -18,7 +18,9 @@ buildKonfig = "0.15.1"
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" }
 
 # Kodein
-kodein = { module = "org.kodein.di:kodein-di-framework-compose", version.ref = "kodein" }
+kodein-compose = { module = "org.kodein.di:kodein-di-framework-compose", version.ref = "kodein" }
+kodein-core = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
+kodein-android = { module = "org.kodein.di:kodein-di-framework-android-x", version.ref = "kodein" }
 
 # Voyager
 voyager-core = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }

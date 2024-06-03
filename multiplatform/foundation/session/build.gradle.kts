@@ -14,7 +14,7 @@ kotlin {
                 implementation(libs.kotlinx.collections.immutable)
 
                 // DI
-                implementation(libs.kodein)
+                implementation(libs.kodein.compose)
 
                 // Coroutines
                 implementation(libs.coroutines.core)

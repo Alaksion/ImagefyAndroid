@@ -7,8 +7,13 @@ import androidx.lifecycle.lifecycleScope
 import multiplatform.ui.app.ImagefyApp
 import multiplatform.ui.app.ImagefyAppPlugin
 import multiplatform.ui.listeners.LoginListener
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), DIAware {
+
+    override val di: DI by closestDI()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
