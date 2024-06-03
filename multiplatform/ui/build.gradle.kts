@@ -22,6 +22,7 @@ kotlin {
                 implementation(projects.multiplatform.foundation.session)
                 implementation(projects.multiplatform.foundation.uiEvent)
                 implementation(projects.multiplatform.foundation.stateScreenmodel)
+                implementation(projects.multiplatform.foundation.navigation)
                 implementation(projects.multiplatform.foundation.logger)
 
                 // Kotlin Multiplatform
@@ -41,9 +42,6 @@ kotlin {
 
                 // Coroutines
                 implementation(libs.coroutines.core)
-
-                // Others
-                implementation(libs.kamel)
             }
         }
 

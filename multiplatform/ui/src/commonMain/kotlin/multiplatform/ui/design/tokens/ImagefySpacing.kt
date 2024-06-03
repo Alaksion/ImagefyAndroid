@@ -2,7 +2,7 @@ package multiplatform.ui.design.tokens
 
 import androidx.compose.ui.unit.dp
 
-internal object ImagefySpacing {
+object ImagefySpacing {
     val XSmall3 = 2.dp
     val XSmall2 = 4.dp
     val XSmall = 8.dp

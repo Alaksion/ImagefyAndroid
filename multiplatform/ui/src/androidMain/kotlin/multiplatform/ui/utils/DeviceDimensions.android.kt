@@ -6,7 +6,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal actual fun rememberDeviceDimensions(): DeviceDimensions {
+actual fun rememberDeviceDimensions(): DeviceDimensions {
     val config = LocalConfiguration.current
     return remember {
         DeviceDimensions(

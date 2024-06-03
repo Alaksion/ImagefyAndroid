@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.Dp
 import multiplatform.ui.design.tokens.ImagefySpacing
 
 @Composable
-internal fun BaseListItem(
+fun BaseListItem(
     modifier: Modifier = Modifier,
     spacing: Dp = ImagefySpacing.Small,
     leading: (@Composable RowScope.() -> Unit)? = null,

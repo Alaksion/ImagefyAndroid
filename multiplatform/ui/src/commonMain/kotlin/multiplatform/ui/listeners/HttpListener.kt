@@ -5,7 +5,7 @@ import io.github.alaksion.unsplashwrapper.platform.listeners.HttpListener
 import io.github.alaksion.unsplashwrapper.platform.listeners.HttpResponse
 import multiplatform.ui.utils.generateUUID
 
-internal class AppHttpListener : HttpListener {
+class AppHttpListener : HttpListener {
 
     private var _httpRequests = mutableListOf<AppHttpCall>()
 
@@ -25,7 +25,7 @@ internal class AppHttpListener : HttpListener {
     }
 }
 
-internal data class AppHttpCall(
+data class AppHttpCall(
     val code: Int,
     val body: String,
     val headers: List<HttpHeader>,

@@ -1,5 +1,4 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-import org.jetbrains.compose.ExperimentalComposeLibrary
 
 plugins {
     id("com.android.application")
@@ -77,10 +76,12 @@ dependencies {
 
     implementation(libs.kodein.core)
     implementation(libs.kodein.android)
+    implementation(libs.voyager.core)
 
     // Test
     testImplementation(kotlin("test"))
 
     // Projects
     implementation(projects.multiplatform.ui)
+    implementation(projects.multiplatform.features)
 }

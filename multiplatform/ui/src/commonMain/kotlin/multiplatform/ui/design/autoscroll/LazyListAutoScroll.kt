@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 
 @Composable
-internal fun LazyListState.AutoScroll(
+fun LazyListState.AutoScroll(
     enabled: Boolean = true,
     offset: Int = 0,
     onNext: () -> Unit,

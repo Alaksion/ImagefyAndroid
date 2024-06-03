@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import multiplatform.ui.design.tokens.ImagefySpacing
 
 @Composable
-internal fun ErrorView(
+fun ErrorView(
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.Outlined.Close,
     title: String = "Something went wrong",

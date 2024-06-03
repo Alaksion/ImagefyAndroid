@@ -5,7 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.Dp
 
 @Composable
-internal fun rememberImageProportionalHeight(
+fun rememberImageProportionalHeight(
     containerWidth: Dp,
     originalImageWidth: Dp,
     originalImageHeight: Dp

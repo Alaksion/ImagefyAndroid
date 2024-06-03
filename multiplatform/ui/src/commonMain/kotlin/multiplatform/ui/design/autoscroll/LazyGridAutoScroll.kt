@@ -7,7 +7,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 
 @Composable
-internal fun LazyGridState.AutoScroll(
+fun LazyGridState.AutoScroll(
     enabled: Boolean = true,
     offset: Int = 0,
     onNext: () -> Unit,
