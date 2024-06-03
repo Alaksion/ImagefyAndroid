@@ -1,8 +1,14 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec
+
 plugins {
     id("io.github.alaksion.imagefyandroid.kmpPublishable")
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.buildKonfig)
 }
+
+val props = gradleLocalProperties(rootDir)
 
 kotlin {
 
@@ -68,4 +74,20 @@ kotlin {
         }
     }
 
+}
+
+buildkonfig {
+    packageName = "multiplatform.ui.app"
+    defaultConfigs {
+        buildConfigField(
+            type = FieldSpec.Type.STRING,
+            value = props.getProperty("publicKey"),
+            name = "publicKey"
+        )
+        buildConfigField(
+            type = FieldSpec.Type.STRING,
+            value = props.getProperty("privateKey"),
+            name = "privateKey"
+        )
+    }
 }

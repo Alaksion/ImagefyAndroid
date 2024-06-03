@@ -54,8 +54,8 @@ private fun AppEffects(
     }
     LaunchedEffect(key1 = plugin) {
         sdk.initialize(
-            apiKey = plugin.keys.apiKey,
-            privateKey = plugin.keys.private,
+            apiKey = BuildKonfig.publicKey,
+            privateKey = BuildKonfig.privateKey,
             httpListener = httpListener
         )
     }
