@@ -5,6 +5,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.jetbrains.composeKotlin)
 }
 
 val properties = gradleLocalProperties(rootDir)

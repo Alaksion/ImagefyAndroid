@@ -66,16 +66,6 @@ internal fun SearchTabContent(
                 }
             )
         }
-        Header(
-            modifier = Modifier.fillMaxWidth(),
-            query = state.data.query,
-            onChangeQuery = { onAction(SearchTabAction.UpdateQuery(it)) },
-            onSubmit = {
-                keyboard?.hide()
-                onAction(SearchTabAction.SubmitSearch)
-            },
-            onOpenFilters = { scope.launch { sheetState.expand() } }
-        )
         state.View(
             contentView = {
                 ListContent(

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.buildKonfig)
+    alias(libs.plugins.jetbrains.composeKotlin)
 }
 
 val props = gradleLocalProperties(rootDir)
