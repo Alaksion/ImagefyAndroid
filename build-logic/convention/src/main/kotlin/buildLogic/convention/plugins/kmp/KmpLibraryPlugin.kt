@@ -20,7 +20,7 @@ class KmpLibraryPlugin : Plugin<Project> {
             }
 
             extensions.configure<KotlinMultiplatformExtension> {
-                kotlinMultiplatformExtension(extension = this, applyCocoapods = false)
+                kotlinMultiplatformExtension(extension = this)
             }
 
             extensions.configure<LibraryExtension> {

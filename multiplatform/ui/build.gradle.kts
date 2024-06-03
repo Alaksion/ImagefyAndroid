@@ -2,9 +2,8 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 
 plugins {
-    id("io.github.alaksion.imagefyandroid.kmpPublishable")
+    id("io.github.alaksion.imagefyandroid.kmp")
     alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.jetbrains.composeKotlin)
 }
@@ -60,18 +59,6 @@ kotlin {
                 kotlin("test")
                 implementation(libs.coroutines.test)
             }
-        }
-    }
-
-    cocoapods {
-        name = "unsplash-ui"
-        summary = "Unsplash client app shared code"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0" //your cocoapods version
-        ios.deploymentTarget = "14.1" //your iOS deployment target
-        framework {
-            isStatic = false
-            baseName = "unsplash-client"
         }
     }
 
